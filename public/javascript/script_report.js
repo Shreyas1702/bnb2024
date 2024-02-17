@@ -46,6 +46,11 @@ async function uploadFiles(ev) {
         ImgHash,
       }),
     });
+    console.log(res);
+    if (res.status == 200) {
+      alert("File Successfully Uploaded");
+      modal.style.display = "none";
+    }
   } catch (error) {
     console.log(error);
     console.log("Unable to Upload the Image");

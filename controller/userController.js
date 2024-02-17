@@ -95,7 +95,7 @@ module.exports.login = (req, res) => {
     console.log(req.user.relationship);
     if (req.user.relationship === "doc") res.render("coupon/dashboard");
     else {
-      res.render("coupon/dashboard_user");
+      res.redirect("/coupon/dashboard_user");
     }
   } catch (e) {
     console.log(e);

@@ -6,6 +6,7 @@ const multer = require("multer");
 const { storage } = require("./../cloudinary");
 const upload = multer({ storage });
 const axios = require("axios");
+const Patient = require("./../models/Patient");
 
 router
   .route("/register/patient")
@@ -31,9 +32,14 @@ router.get("/logout", users.logout);
 
 router.post("/uploadData", async (req, res) => {
   console.log(req.body.ImgHash);
-  console.log(req.user);
-  const user = Patient.find({ Patient_id: req.user._id });
-  console.log(user);
+  console.log(typeof req.user._id);
+  const user = await Patient.findOne({ Patient_id: req.user._id });
+  console.log(user.wt);
+  user.rep.push(req.body.ImgHash);
+  user.save();
+  res.status(200).json({
+    success: "true",
+  });
 });
 
 module.exports = router;

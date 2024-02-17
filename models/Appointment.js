@@ -9,7 +9,20 @@ const AppointmentSchema = new Schema({
 	patient_id: {
 		type: Schema.Types.ObjectId,
 		ref: "Patient"
-	}
+	},
+	appointment_time: {
+        type: String,
+        
+    },
+    duration: {
+        type: Number, // Duration of appointment in minutes
+        
+    },
+    notes: String // Additional notes for the appointment
+	,
+	link:String,
+	duePay:Number,
+	Status:Boolean
 });
 
 AppointmentSchema.virtual("no", {
