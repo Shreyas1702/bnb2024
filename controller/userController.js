@@ -88,13 +88,56 @@ module.exports.renderLogin = (req, res) => {
   res.render("users/login");
 };
 
-module.exports.login = (req, res) => {
+module.exports.login = async(req, res) => {
   try {
 
-    console.log("Hello Inside Login controller");
-    console.log(req.user.relationship);
-    if(req.user.relationship==='doc')
-    res.render("coupon/dashboard")
+    // console.log("Hello Inside Login controller");
+    // console.log(req.user.relationship);
+    if(req.user.relationship==='doc'){
+
+      const user = req.user._id
+      // console.log(req.user);
+    
+      // Check if hospital exists
+      var hospital = await Hospital.find({ Hosp_id: user })
+      if (!hospital) {
+        return res.status(400).json({ error: 'Invalid hospital_id' })
+      }
+    
+      // Get appointments for the hospital and populate patient
+      //  var appointment = await Appointment.find({
+      //   hospital_id: user,
+      // }).populate('no')
+      // var id = appointment[0].patient_id.toString()
+      // var patient = await Patient.find({ Patient_id: id })
+      // return res.status(200).json({ appoint{ments, patient })
+      const hospital_id = await Hospital.find({doctor_id:req.user._id});
+
+    
+      // Check if hospital exists
+      //  hospital = await Hospital.find({ Hosp_id: req.params.hospital_id });
+      // if (!hospital) {
+      //   return res.status(400).json({ error: "Invalid hospital_id" });
+      // }
+    
+      // Get appointments for the hospital and populate patient
+      const appointments = await Appointment.find({
+        hospital_id: hospital_id,
+      }).populate("no");
+      var id;
+      var patient;
+      var patients = [];
+      console.log(appointments.length);
+      for (var i = 0; i < appointments.length; i++) {
+        id = appointments[i].patient_id.toString();
+    
+        patient = await Patient.find({ Patient_id: id });
+        patients.push(patient);
+        
+      }
+      console.log(patients)
+      res.render("coupon/dashboard", { appointments, patients });
+  }
   else{
 
     res.redirect("/coupon/dashboard_user")
@@ -132,43 +175,42 @@ module.exports.logout = (req, res) => {
 // }
 
 module.exports.dashboard = async (req, res) => {
-  // const user = req.user._id
+  const user = req.user._id
   console.log(req.user);
 
-  // // Check if hospital exists
-  // const hospital = await Hospital.find({ Hosp_id: user })
-  // if (!hospital) {
-  //   return res.status(400).json({ error: 'Invalid hospital_id' })
-  // }
+  // Check if hospital exists
+  var hospital = await Hospital.find({ Hosp_id: user })
+  if (!hospital) {
+    return res.status(400).json({ error: 'Invalid hospital_id' })
+  }
 
-  // // Get appointments for the hospital and populate patient
-  // const appointments = await Appointment.find({
-  //   hospital_id: user,
-  // }).populate('no')
-  // const id = appointments[0].patient_id.toString()
-  // const patient = await Patient.find({ Patient_id: id })
-  // // return res.status(200).json({ appointments, patient })
-  // const hospital_id = req.user._id;
+  // Get appointments for the hospital and populate patient
+   var appointment = await Appointment.find({
+    hospital_id: user,
+  }).populate('no')
+  var id = appointment[0].patient_id.toString()
+  var patient = await Patient.find({ Patient_id: id })
+  // return res.status(200).json({ appointments, patient })
+  const hospital_id = req.user._id;
 
-  // // Check if hospital exists
-  // const hospital = await Hospital.find({ Hosp_id: req.params.hospital_id });
-  // if (!hospital) {
-  //   return res.status(400).json({ error: "Invalid hospital_id" });
-  // }
+  // Check if hospital exists
+   hospital = await Hospital.find({ Hosp_id: req.params.hospital_id });
+  if (!hospital) {
+    return res.status(400).json({ error: "Invalid hospital_id" });
+  }
 
-  // // Get appointments for the hospital and populate patient
-  // const appointments = await Appointment.find({
-  //   hospital_id: hospital_id,
-  // }).populate("no");
-  // var id;
-  // var patient;
-  // var patients = [];
-  // console.log(appointments.length);
-  // for (var i = 0; i < appointments.length; i++) {
-  //   id = appointments[i].patient_id.toString();
+  // Get appointments for the hospital and populate patient
+  const appointments = await Appointment.find({
+    hospital_id: hospital_id,
+  }).populate("no");
+  var id;
+  var patients = [];
+  console.log(appointments.length);
+  for (var i = 0; i < appointments.length; i++) {
+    id = appointments[i].patient_id.toString();
 
-  //   patient = await Patient.find({ Patient_id: id });
-  //   patients.push(patient);
-  // }
+   var patient = await Patient.find({ Patient_id: id });
+    patients.push(patient);
+  }
   res.render("coupon/dashboard", { appointments, patients });
 };

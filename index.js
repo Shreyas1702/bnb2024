@@ -175,7 +175,7 @@ app.post("/upload/:id", upload1.single("photo"), async (req, res) => {
   } catch (error) {
     console.log("error");
   }
-  res.redirect('/dashboard_user');
+  res.redirect('/coupon/dashboard_user');
   // Save the photo to the database
 });
 
