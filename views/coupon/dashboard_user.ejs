@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Doctor Dashboard</title>
+    <title>User_Dashboard</title>
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
       rel="stylesheet"
@@ -43,8 +43,16 @@
 
           <a href="#" onclick="openCModal()">
             <span class="material-icons-sharp"> add </span>
-            <h3>Verify</h3>
+            <h3>Add Reports</h3>
           </a>
+          <div id="myModal" class="modal">
+            <div class="modal-content">
+              <span class="close" onclick="closeModal()">&times;</span>
+              <p>Select your Report File:</p>
+              <input type="file" name="image" id="image" />
+              <button id="Submit" onclick="uploadFiles(event)">Submit</button>
+            </div>
+          </div>
           <a href="#">
             <span class="material-icons-sharp"> logout </span>
             <h3>Logout</h3>
@@ -53,7 +61,7 @@
       </aside>
       <!--------------------- End OF ASIDE------------------------------->
       <main>
-        <h1>Doctor Dashboard</h1>
+        <h1>User Dashboard</h1>
         <div class="insights">
           <div class="sales">
             <span class="material-icons-sharp"> analytics </span>
@@ -421,6 +429,8 @@
       </div>
     </div>
 
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="/javascript/dash.js"></script>
+    <script src="/javascript/script_report.js"></script>
   </body>
 </html>

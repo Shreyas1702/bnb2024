@@ -36,6 +36,11 @@ const PatientSchema = new Schema({
     type: String,
     required: [true, "plz provide address"],
   },
+  rep: [
+    {
+      type: String,
+    },
+  ],
   zc: {
     type: Number,
     required: [true, "A pin code is required"],
@@ -45,12 +50,10 @@ const PatientSchema = new Schema({
     data: Buffer,
     contentType: String,
   },
-  Patient_id: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
-  ],
+  Patient_id: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 // AssignmentSchema.virtual("no", {

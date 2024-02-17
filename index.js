@@ -28,6 +28,8 @@ const upload = multer();
 const Patient = require("./models/Patient");
 const Hospital = require("./models/Hosp");
 const Appointment = require("./models/Appointment");
+const fileUpload = require("express-fileupload");
+
 app.use(
   cors({
     origin: "*",
@@ -39,6 +41,7 @@ app.use(bodyParser.json());
 var jsonParser = bodyParser.json();
 
 app.use(express.urlencoded({ extended: true }));
+app.use(fileUpload());
 
 app.set("view engine", "ejs");
 
@@ -174,7 +177,7 @@ app.post("/upload/:id", upload1.single("photo"), async (req, res) => {
   } catch (error) {
     console.log("error");
   }
-  res.send("success");
+  res.redirect("coupon/dashboard_user");
   // Save the photo to the database
 });
 

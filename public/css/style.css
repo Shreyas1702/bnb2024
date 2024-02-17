@@ -413,7 +413,7 @@ main .recent-orders a {
   color: var(--color-primary);
 }
 
-/*=================================Right=============================*/
+/* /=================================Right=============================/  */
 .right {
   margin-top: 1.4rem;
 }
@@ -460,7 +460,8 @@ main .recent-orders a {
   text-align: right;
 }
 
-/*=================================RECENT UPDATES=========================*/
+/* /=================================RECENT
+  UPDATES=========================/ */
 .right .top .recent-updates {
   margin-top: 1rem;
 }
@@ -488,7 +489,8 @@ main .recent-orders a {
   margin-bottom: 1rem;
 }
 
-/*======================SALES ANALYTICS====================*/
+/* /======================SALES
+  ANALYTICS====================/ */
 .right .sales-analytics {
   margin-top: 2rem;
 }
@@ -561,7 +563,7 @@ main .recent-orders a {
   font-weight: 600;
 }
 
-/*=============================MEDIA Queries======================*/
+/* /=============================MEDIA Queries======================/ */
 @media screen and (max-width: 1200px) {
   .container {
     width: 94%;
@@ -612,8 +614,10 @@ main .recent-orders a {
     display: none;
   }
 }
-
-/*========================media queries 2================*/
+/* 
+/========================media
+  queries
+  2================/ */
 @media screen and (max-width: 768px) {
   .container {
     width: 100%;
@@ -742,29 +746,49 @@ main .recent-orders a {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-/* Style for the modal content */
 .modal-content {
-  background-color: white;
+  background-color: #fefefe;
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
-  max-width: 750px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px #888;
-  position: relative;
 }
 
-/* Style for the close button */
 .close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 25px;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
   font-weight: bold;
-  color: #888;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
   cursor: pointer;
 }
+
+/* Add this style for drag and drop area */
+.drop-area {
+  width: 100%;
+  height: 100px;
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.drop-area:hover {
+  background-color: #f0f0f0;
+}
+
+.drop-area:active {
+  background-color: #e0e0e0;
+}
+
+/* Rest of the styles remain unchanged */
 
 .modelbutt {
   padding: 0.4rem 0.8rem;
@@ -832,6 +856,14 @@ select {
 
 .form div label {
   margin-right: 5px;
+}
+
+#upload {
+  margin-top: 2%;
+  background-color: #a2a5ab;
+  font-size: 20px;
+  color: white;
+  width: 10%;
 }
 
 .buttonbar {
