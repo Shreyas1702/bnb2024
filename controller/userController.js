@@ -33,6 +33,7 @@ module.exports.register = async (req, res, next) => {
     const Patient_id = registeredUser._id.toString();
     console.log(registeredUser._id.toString());
     const patientData = await Patient.create({
+      username,
       Patient_id,
       ht,
       gen,

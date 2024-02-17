@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 const passportLocalMongoose = require("passport-local-mongoose");
 
 const PatientSchema = new Schema({
+  username: {
+    type: String,
+    required: true,
+  },
   ht: {
     type: Number,
     required: [true, "Plz provide Height"],

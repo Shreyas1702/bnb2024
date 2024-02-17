@@ -26,7 +26,7 @@ const FormData = require("form-data");
 const axios = require("axios");
 const upload = multer();
 const Patient = require("./models/Patient");
-const Hosp = require("./models/Hosp");
+const Hospital = require("./models/Hosp");
 const Appointment = require("./models/Appointment");
 app.use(
   cors({
@@ -219,6 +219,6 @@ app.get("/doctor/type/:id", async (req, res) => {
 module.exports = app;
 
 app.get("/coupon/dashboard_user", async (req, res) => {
-  const doctors = await Hosp.find();
+  const doctors = await Hospital.find();
   res.render("coupon/dashboard_user", { doctors });
 });
