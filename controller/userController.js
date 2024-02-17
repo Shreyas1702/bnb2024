@@ -32,6 +32,7 @@ module.exports.register = async (req, res, next) => {
     const Patient_id = registeredUser._id.toString();
     console.log(registeredUser._id.toString());
     const patientData = await Patient.create({
+      Patient_id,
       ht,
       gen,
       st,
@@ -56,7 +57,7 @@ module.exports.registerhosp = async (req, res, next) => {
     console.log(req.body);
     const { email, username, password, add, phn, specialization } = req.body;
 
-    const user = new Hospital({ email, username });
+    const user = new User({ email, username });
 
     const registeredUser = await User.register(user, password);
     const Hosp_id = registeredUser._id.toString();
