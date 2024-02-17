@@ -28,6 +28,11 @@ const UserSchema = new Schema({
     type: Number,
     default: 0,
   },
+  relationship:{
+    type:String,
+    enum:['doc','pat'],
+    required:[true,'A relationship is important either doctor or patient']
+  },
   coupon: [
     {
       type: Schema.Types.ObjectId,

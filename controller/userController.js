@@ -24,9 +24,10 @@ module.exports.register = async (req, res, next) => {
     console.log(req.body);
     const { email, username, password, ht, gen, st, adno, phn, wt, add, zc } =
       req.body;
+const relationship='pat'
 
     // comp_type = 'hosp'
-    const user = new User({ email, username });
+    const user = new User({ email, username,relationship });
 
     const registeredUser = await User.register(user, password);
     const Patient_id = registeredUser._id.toString();
@@ -40,6 +41,7 @@ module.exports.register = async (req, res, next) => {
       wt,
       add,
       zc,
+      Patient_id
     });
     req.login(registeredUser, (err) => {
       if (err) return next(err);
@@ -55,8 +57,8 @@ module.exports.registerhosp = async (req, res, next) => {
   try {
     console.log(req.body);
     const { email, username, password, add, phn, specialization } = req.body;
-
-    const user = new Hospital({ email, username });
+const relationship='doc'
+    const user = new User({ email, username,relationship });
 
     const registeredUser = await User.register(user, password);
     const Hosp_id = registeredUser._id.toString();
@@ -88,9 +90,14 @@ module.exports.renderLogin = (req, res) => {
 
 module.exports.login = (req, res) => {
   try {
+
     console.log("Hello Inside Login controller");
-    console.log(req.user);
-    res.render("coupon/dashboard");
+    console.log(req.user.relationship);
+    if(req.user.relationship==='doc')
+    res.render("coupon/dashboard")
+  else{
+    res.render("coupon/dashboard_user")
+  }
   } catch (e) {
     console.log(e);
   }
