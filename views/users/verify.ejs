@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Live Photo Capture</title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+
+    
+    <video id="video" width="640" height="480" autoplay></video>
+    <canvas id="canvas" width="640" height="480"></canvas>
+    <button id="capture-btn">Capture Photo</button>
+
+
+
+
+    <script>
+      const video = document.getElementById('video')
+      const canvas = document.getElementById('canvas')
+      const captureBtn = document.getElementById('capture-btn')
+      const backendUrl = 'http://34.199.93.100:80/upload-photo/<%=id%>'
+
+      navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+        video.srcObject = stream
+        video.play()
+      })
+
+      captureBtn.addEventListener('click', () => {
+        const context = canvas.getContext('2d')
+        context.drawImage(video, 0, 0, canvas.width, canvas.height)
+        const dataUrl = canvas.toDataURL('image/jpeg')
+        const blob = dataURItoBlob(dataUrl)
+        sendPhoto(blob)
+      })
+
+      function sendPhoto(photo) {
+        const formData = new FormData()
+        formData.append('photo', photo)
+        fetch(backendUrl, { method: 'POST', body: formData })
+          .then((response) => {
+            if (response.status == 200) {
+              window.location.href = "http://34.199.93.100:80/dashboard";
+            } else {
+              console.log('Match not found');
+            }
+          })
+          .catch((error) => {
+            console.error('Error uploading photo:', error)
+          })
+      }
+
+      function dataURItoBlob(dataURI) {
+        const byteString = atob(dataURI.split(',')[1])
+        const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+        const arrayBuffer = new ArrayBuffer(byteString.length)
+        const byteArray = new Uint8Array(arrayBuffer)
+        for (let i = 0; i < byteString.length; i++) {
+          byteArray[i] = byteString.charCodeAt(i)
+        }
+        return new Blob([arrayBuffer], { type: mimeString })
+      }
+    </script>
+  </body>
+</html>

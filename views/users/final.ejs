@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/pat.css" />
+    <link rel="stylesheet" href="/css/register.css" />
+    <!-- <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    /> -->
+  </head>
+  <body>
+    <main class="container" mt="5"><%- include('../partials/flash')%></main>
+    <nav class="navbar">
+      <div class="nav-title">MedEasy</div>
+
+      <div class="pages">
+        <span class="page"><a href="/" class="active">Home</a></span>
+        <span class="page"><a href="/login">Login</a></span>
+      </div>
+    </nav>
+    <!-- <img
+      src="/images/Coupon.png"
+      width="1000px"
+      alt="coupon"
+      style="transform: rotate(350deg); margin-top: -100px; opacity: 0.9"
+    /> -->
+
+    <!-- <div class="form">
+      <h2>Register</h2>
+      <form
+        method="POST"
+        novalidate
+        action="/register"
+        onsubmit="return validateForm() "
+      > -->
+        <!-- <div class="element">
+          <label for="username">Username</label>
+          <input type="text" name="username" id="username" autofocus required />
+          <span class="text-center fs-5" id="error1"></span>
+        </div>
+        <div class="element">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" required />
+          <span class="text-center fs-5" id="error2"></span>
+        </div>
+        <div class="element">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" required />
+          <span id="error3" class="text-center fs-5"></span>
+        </div>
+        <div class="element">
+          <label for="cpassword">Confirm Password</label>
+          <input type="password" name="cpassword" id="cpassword" required />
+          <span class="text-center fs-5" id="error4"></span>
+        </div> -->
+
+        <!-- <button type="submit" id="btn-submit">Register</button> -->
+      <!-- </form> -->
+      <div class="container shadow-lg">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card shadow-lg">
+                    
+                    <form
+                        method="POST"
+                        novalidate
+                        action="/register"
+                        onsubmit="return validateForm() "
+                        class="box"
+                    >
+                        <h2>Patient Registration</h2>
+                        <p class="text-muted">Enter following details carefully</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" name="username" placeholder="User">
+                                <input type="password" name="password" placeholder="Password">
+                                <input type="text" name="" placeholder="First Name">
+                                <input type="text" name="" placeholder="Father Name">
+                                <input type="text" name="email" placeholder="Email">
+                                <input type="number" name="" placeholder="Height(in mtrs)">
+                                <input type="text" name="" placeholder="Gender">
+                                <input type="text" name="" placeholder="Address">
+                              </div>
+                              <div class="col-md-6">
+                              <input type="password" name="cpassword" placeholder="Confirm Password">
+
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="" placeholder="Last Name">
+                                <input type="text" name="" placeholder="Mother Name">
+                                <input type="number" name="" placeholder="Phone No.">
+                                <input type="number" name="" placeholder="Weight(in kg)">
+                                <input type="text" name="" placeholder="Address">
+                            </div>
+
+                        </div>
+                        
+                        
+                        <input type="submit" name="" value="Login" href="#">
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- <div class="footer">
+      <ul class="footer__nav">
+        <li class="footer__item">
+          <a class="footer__link" href="#">About</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">Pricing</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">Terms of Use</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">Privacy Policy</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">Careers</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">Blog</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">Contact Us</a>
+        </li>
+      </ul>
+      <img src="/images/logo.png" width="200px  " alt="logo" />
+      <p class="footer__copyright">
+        &copy; Copyright by
+        <a class="footer__link twitter-link" target="_blank" href="#">
+          CouponZo</a
+        >.
+      </p>
+      <p class="footer_p">Made by : <span>  Sahil </span></p>
+    </div> -->
+    <div class="footer" style="margin-top: 1000px;">
+      <ul class="footer__nav">
+        <li class="footer__item">
+          <a class="footer__link" href="#">About</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">Pricing</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">Terms of Use</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">Privacy Policy</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">Careers</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">Blog</a>
+        </li>
+        <li class="footer__item">
+          <a class="footer__link" href="#">Contact Us</a>
+        </li>
+      </ul>
+      <img src="/images/logo.png" width="200px  " alt="logo" />
+      <p class="footer__copyright">
+        &copy; Copyright by
+        <a class="footer__link twitter-link" target="_blank" href="#">
+          CouponZo</a
+        >.
+      </p>
+      <p class="footer_p">Made by : <span>  Sahil </span></p>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+  <script src="/javascript/register.js"></script>
+</html>

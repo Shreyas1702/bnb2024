@@ -1,0 +1,184 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f4f9;
+  /* padding: 0px 60px; */
+}
+.content {
+  /* width: 60%; */
+  display: flex;
+  /* flex-direction: column; */
+  /* align-items: ; */
+  /* text-align: left; */
+  justify-content: space-around;
+  font-size: 44px;
+}
+.desc {
+  width: 90%;
+  font-weight: bold;
+  font-size: 26px;
+  color: #f27483;
+  color: #fb5741;
+  color: #69f0ba;
+  color: #5893f6;
+  /* background-color: #cfcece; */
+  /* background-color:#e8e7ed; */
+}
+.title {
+  /* justify-content: flex-start; */
+  /* margin-right: auto; */
+  position: absolute;
+}
+h1 {
+  color: #727eeb;
+}
+.navbar {
+  background-color: #f6f4f9;
+  line-height: 50px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 3px 4px 3px 4px rgb(0, 0, 0, 0.4);
+}
+.navbar img {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+.pages {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 40px;
+  margin-right: 40px;
+  margin-left: 40px;
+}
+.page {
+  padding: 5px 20px;
+  border-radius: 20px 20px 20px 20px;
+  font-weight: bold;
+  font-size: 24px;
+  background-color: #e8e7ed;
+  color: #f27483;
+}
+a {
+  color: #69f0ba;
+  color: #f27483;
+
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  /* color:black; */
+}
+.right {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 150%;
+  /* border: 2px red solid; */
+  gap: 20px;
+}
+.pic1 {
+  padding-top: 40px;
+  align-self: flex-start;
+  transform: rotate(350deg);
+}
+.pic2 {
+  justify-self: flex-end;
+  align-self: flex-end;
+  transform: rotate(10deg);
+}
+.pic3 {
+  justify-self: flex-end;
+  align-self: center;
+  transform: rotate(-3deg);
+}
+
+.content {
+  /* padding-top: 60px; */
+  padding: 60px 60px;
+}
+
+.button1 {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 15px;
+  align-items: center;
+  margin-top: 30px;
+  box-shadow: 0 9px #999;
+}
+
+.button1:hover {
+  background-color: #3e8e41;
+}
+
+.button1:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.footer {
+  background-color: #37383d;
+  color: black;
+  text-align: center;
+  margin-top: 100px;
+  position: relative;
+  bottom: 0;
+}
+
+.footer {
+  padding: 2rem 0;
+}
+
+.footer__nav {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  /* margin-bottom: 1rem; */
+}
+
+.footer__item {
+  margin-right: 4rem;
+}
+
+.footer__link {
+  font-size: 22px;
+  color: #eee;
+  text-decoration: none;
+}
+
+.footer__logo {
+  height: 5rem;
+  align-items: center;
+  margin: 0 auto;
+  margin-bottom: 5rem;
+}
+
+.footer__copyright {
+  font-size: 1.4rem;
+  color: #aaa;
+  text-align: center;
+}
+
+.footer__copyright .footer__link {
+  font-size: 1.4rem;
+  top: 0rem;
+}
+
+#ft_logo {
+  margin: 2rem 2rem;
+}
+
+.footer_p {
+  font-size: 20px;
+  color: white;
+  word-spacing: 10px;
+}

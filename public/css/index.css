@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  color: white;
+}
+
+.background {
+  /* background-color: #1E1E1E; */
+  background-image: url('./../images/background.jpg');
+  height: 100vh;
+}
+
+.footer-new {
+  background-image: url('./../images/background.jpg');
+  padding: 4rem 3rem 1rem 3rem;
+}
+
+nav {
+  padding: 3rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background: #3D3D3D; */
+  /* margin: 2rem; */
+  border-radius: 8px;
+  /* box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.25); */
+}
+
+.nav-title {
+  font-weight: 900;
+  font-size: 2rem;
+  background: linear-gradient(90deg, #f5be0a 0%, #ffed8a 50.83%, #f5be0a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.nav-links {
+  display: flex;
+  gap: 3rem;
+}
+
+.nav-link {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.landing {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* padding: 2rem; */
+  padding: 4rem;
+}
+
+.landing-title {
+  font-size: 3rem;
+  line-height: 4rem;
+  max-width: 550px;
+  margin: 3rem;
+  font-weight: 700;
+}
+
+.landing > div > p {
+  margin: 3rem;
+  font-weight: 200;
+}
+
+.landing > div > .btns {
+  margin: 3rem;
+  gap: 2rem;
+}
+
+.landing > div > .btns > .btn {
+  font-size: 1.25rem;
+}
+
+.illustration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.illustration > img {
+  width: 600px;
+  height: 450px;
+  border-radius: 30px;
+}
+
+.container {
+  /* padding: 2rem; */
+  padding: 4rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.patient {
+  /* background: linear-gradient(90deg, #01147C 0%, #0000FD 55.52%, #06B2FF 100%); */
+  background-image: url('./../images/background.jpg');
+  padding: 40px;
+  border-radius: 8px;
+  width: 400px;
+  transition: transform 0.5s;
+  margin: auto;
+}
+
+.patient:hover {
+  transform: scale(1.15);
+}
+
+.img > img {
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  height: 250px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.patient-head {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.patient-description {
+  font-weight: 400;
+  font-size: 0.825rem;
+  margin: 2rem 0rem;
+}
+
+.btns {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.5rem 1.25rem;
+  border-radius: 4px;
+}
+
+.btn-solid {
+  border: none;
+  background-color: white;
+  font-weight: 300;
+}
+
+.btn-outline {
+  border: 1px solid white;
+  color: white;
+  background-color: rgba(0, 0, 0, 0);
+  font-weight: 300;
+}
+
+.description {
+  padding: 0rem 14rem;
+  text-align: center;
+  font-weight: 200;
+}
+
+/* -------------------------------------------------------------- */
+
+.blog-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-bottom: 10vh;
+  background-color: rgba(239, 239, 239);
+}
+.article-container {
+  margin: 1rem auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+.blog-section > h1 {
+  font-size: 45px;
+  margin: 2rem 4rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: hsl(233, 26%, 24%);
+}
+.article {
+  height: max-content;
+  width: 250px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+.article > img {
+  border-radius: 8px 8px 0px 0px;
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+}
+.content {
+  padding: 15px;
+}
+.content > p {
+  color: hsl(233, 8%, 62%);
+  font-weight: 400;
+  font-size: 14px;
+  text-align: justify;
+}
+.content > h4 {
+  color: hsl(233, 26%, 24%);
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+.footer {
+  margin-top: 5rem;
+  /* padding: 3rem 3rem; */
+  /* background-color: #37383d; */
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.social-container > img {
+  margin: 1rem;
+}
+
+li {
+  list-style: none;
+  margin: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.last-btn {
+  height: max-content;
+  padding: 1rem;
+  border-radius: 100px;
+  background-color: white;
+}
+
+/* -------------------------------------------------------------- */
