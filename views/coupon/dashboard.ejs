@@ -117,16 +117,32 @@
             <thead>
               <tr>
                 <th>Patient ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Patient name</th>
                 <th>Phone no</th>
                 <th>Aadhar no.</th>
                 <th>Gender</th>
-                <th>Verify</th>
+                <th>Approve</th>
                 <th></th>
                 <th></th>
               </tr>
             </thead>
+          <tbody>
+            <% for (var i =0; i <appointments.length;  i++ ) { %>
+              <%= console.log(patients[i][0])%>
+              <tr>
+              <td><%=patients[i][0].Patient_id%></td>
+              <td><%=patients[i][0].username%></td>
+              <td><%=patients[i][0].phn%></td>
+              <td><%=patients[i][0].adno%></td>
+              <td><%=patients[i][0].gen%></td>
+              <td><div>
+                <a href="/verify/user/<%=patients[i][0].Patient_id%>">
+                  <h3>Approve Appointment</h3>
+                </a>
+              </div></td>
+              </tr>
+              <% } %>
+          </tbody>
           </table>
           <a href="#">Show All</a>
         </div>
