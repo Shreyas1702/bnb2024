@@ -28,6 +28,7 @@ const upload = multer();
 const Patient = require("./models/Patient");
 const Hospital = require("./models/Hosp");
 const Appointment = require("./models/Appointment");
+const Hosp = require("./models/Hosp");
 app.use(
   cors({
     origin: "*",
@@ -174,13 +175,13 @@ app.post("/upload/:id", upload1.single("photo"), async (req, res) => {
   } catch (error) {
     console.log("error");
   }
-  res.render('coupon/dashboard_user');
+  res.redirect('/dashboard_user');
   // Save the photo to the database
 });
 
-app.post("/appointments", async (req, res) => {
-  const { hospital_id, patient_id } = req.body;
-
+app.get("/appointment/doctor/:id", async (req, res) => {
+  const patient_id  = req.user._id;
+const hospital_id=req.params.id
   // Validate hospital_id and patient_id
   if (!hospital_id || !patient_id) {
     return res
@@ -210,4 +211,16 @@ app.post("/appointments", async (req, res) => {
   return res.status(200).json({ message: "Appointment created successfully" });
 });
 
+app.get("/doctor/type/:id", async(req,res)=>{
+const type=req.params.id;
+var doctors=await Hospital.find({specialization:type})
+console.log(doctors)
+res.render("coupon/dashboard_user", {doctors});
+})
 module.exports = app;
+
+app.get('/coupon/dashboard_user',async(req,res)=>{
+  const doctors=await Hosp.find()
+  res.render("coupon/dashboard_user", {doctors});
+})
+
