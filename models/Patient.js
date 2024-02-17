@@ -40,6 +40,10 @@ const PatientSchema = new Schema({
     type: String,
     required: [true, "plz provide address"],
   },
+  lang: {
+    type: String,
+    required: [true, "plz provide address"],
+  },
   rep: [
     {
       type: String,
