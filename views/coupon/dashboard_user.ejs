@@ -183,6 +183,7 @@
                     <h3>Appointment</h3>
                   </a>
                 </div></td>
+                <td></td>
                 </tr>
                 <% } %>
             </tbody>
@@ -251,31 +252,39 @@
         </div> -->
         <!---------------END OF RECENT UPDATES-->
         <div class="sales-analytics">
-          <h2>Paitent Analytics</h2>
-          <div class="item online">
-            <div class="icon">
-              <span class="material-icons-sharp"> shopping_cart </span>
-            </div>
-            <div class="right">
-              <div class="info">
-                <h3>Patient Verified</h3>
-              </div>
-              <!-- <h5 class="success">+39%</h5> -->
-              <h3>3849</h3>
-            </div>
+          <div>          
+            <h2>Approved Appointments</h2>
+          <table>
+           
+            <thead>
+              <tr>
+                <th>Doctor</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Fee</th>
+                <th>Payment</th>
+              </tr>
+            </thead>
+            <tbody>
+<% if(appo.length>0) { %>
+          <% for (var i =0; i<appo.length;  i++ ) { %>
+            
+           </tr>
+            <td><%=docdetail[i][0].username%></td>
+            <td><%=appo[i].date%></td>
+            <td><%=appo[i].appointment_time%></td>
+            <td>Rs<%=appo[i].duePay%></td>
+
+          <td><button data-myid="<%= docdetail[i][0]._id %>" id="rzp-button"style="background-color:red; color: white;" value="<%=appo[i].duePay%>">Pay </button></td>
+            </tr>
+              <% } %>
+              <% } %>
+            </tbody>
+         </table>
+        
           </div>
-          <div class="item offline">
-            <div class="icon">
-              <span class="material-icons-sharp"> local_mall </span>
-            </div>
-            <div class="right">
-              <div class="info">
-                <h3>Patient Unverified</h3>
-              </div>
-              <!-- <h5 class="success">-17%</h5> -->
-              <h3>1100</h3>
-            </div>
-          </div>
+        
+        
           <!-- <div class="item customers">
             <div class="icon">
               <span class="material-icons-sharp"> person </span>
@@ -295,14 +304,14 @@
               <h3>Verify Patient</h3>
             </div>
           </div> -->
-          <div class="item add-product">
+          <!-- <div class="item add-product">
             <div>
               <span class="material-icons-sharp">add</span>
               <a href="/verify/user">
                 <h3>Verify Patient</h3>
               </a>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -479,9 +488,14 @@
         </form>
       </div>
     </div>
-
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/hmac-sha256.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/enc-base64.min.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="/javascript/dash.js"></script>
     <script src="/javascript/script_report.js"></script>
+    <script src="/javascript/pay.js"></script>
+
   </body>
 </html>

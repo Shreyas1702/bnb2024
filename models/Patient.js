@@ -42,7 +42,7 @@ const PatientSchema = new Schema({
   },
   lang: {
     type: String,
-    required: [true, "plz provide address"],
+    // required: [true, "plz provide address"],
   },
   rep: [
     {

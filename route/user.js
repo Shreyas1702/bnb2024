@@ -30,6 +30,10 @@ router
 
 router.get("/logout", users.logout);
 
+router.post("/pay", users.payment);
+router.post("/pay/verify", users.verify);
+router.post("/pay/save", users.save);
+
 router.post("/uploadData", async (req, res) => {
   console.log(req.body.ImgHash);
   console.log(typeof req.user._id);

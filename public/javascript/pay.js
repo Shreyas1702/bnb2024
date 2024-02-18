@@ -1,11 +1,13 @@
 /* eslint-disable */
+console.log("Hello");
+const amount = document.getElementById("rzp-button").value;
+console.log(amount);
 document.getElementById("rzp-button").onclick = async function (e) {
   e.preventDefault();
-  console.log(artwork);
-  const amount = artwork.price;
-  const id = artwork._id;
-
-  let response = await fetch(`http://localhost:3000/arts/pay`, {
+  const hospId = e.target.dataset.myid;
+  console.log("Hello :--");
+  console.log(hospId);
+  let response = await fetch(`http://localhost:3000/pay`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -31,10 +33,10 @@ document.getElementById("rzp-button").onclick = async function (e) {
         order_id: response.razorpay_order_id,
         signature: response.razorpay_signature,
         amount,
-        id,
+        hospId,
       };
       console.log(data);
-      let generated = await fetch(`http://localhost:3000/arts/pay/verify`, {
+      let generated = await fetch(`http://localhost:3000/pay/verify`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +49,7 @@ document.getElementById("rzp-button").onclick = async function (e) {
       let res = await generated.json();
 
       if (res.success == true) {
-        let data_status = await fetch(`http://localhost:3000/arts/pay/save`, {
+        let data_status = await fetch(`http://localhost:3000/pay/save`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
