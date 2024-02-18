@@ -163,10 +163,8 @@
               <tr>
                 <th>Doctor ID</th>
                 <th>Name</th>
-                <th>Email</th>
                 <th>Phone no</th>
-                <th>address</th>
-                <th>Book</th>
+                <th>SLot</th>
               </tr>
             </thead>
             <tbody>
@@ -175,13 +173,17 @@
                 <tr>
                 <td><%=doctors[i]._id%></td>
                 <td><%=doctors[i].username%></td>
-                <td><%=doctors[i].email%></td>
                 <td><%=doctors[i].phn%></td>
-                <td><%=doctors[i].add%></td>
+                
                 <td><div>
-                  <a href="/appointment/doctor/<%=doctors[i]._id%>">
+                  <!-- <a href="/appointment/doctor/<%=doctors[i]._id%>">
                     <h3>Appointment</h3>
-                  </a>
+                  </a> -->
+                  <button style="margin: 5px; padding: 5px; background-color: rgb(85, 197, 122);"><a style="padding: 0px; margin: 0px; color: white;" href="/appointment/doctor/<%=doctors[i]._id%>/0">9.00 - 9:30</a></button><button style="margin: 5px;padding: 5px;background-color: rgb(85, 197, 122);"><a style="padding: 0px; margin: 0px; color: white;" href="/appointment/doctor/<%=doctors[i]._id%>/2">9.00 - 9:30</a></button><button style="margin: 5px;padding: 5px;background-color: rgb(85, 197, 122)"><a style="padding: 0px; margin: 0px; color: white;" href="/appointment/doctor/<%=doctors[i]._id%>/3">9.00 - 9:30</a></button>
+                  <button style="margin: 5px;padding: 5px;background-color: rgb(85, 197, 122);"><a style="padding: 0px; margin: 0px; color: white;" href="/appointment/doctor/<%=doctors[i]._id%>/4">9.00 - 9:30</a></button><button style="margin: 5px;padding: 5px;background-color: rgb(85, 197, 122);"><a style="padding: 0px; margin: 0px; color: white;" href="/appointment/doctor/<%=doctors[i]._id%>/5">9.00 - 9:30</a></button><button style="margin: 5px;padding: 5px;background-color: rgb(85, 197, 122)"><a style="padding: 0px; margin: 0px; color: white;" href="/appointment/doctor/<%=doctors[i]._id%>/6">9.00 - 9:30</a></button>
+                  <button style="margin: 5px;padding: 5px;background-color: rgb(85, 197, 122);"><a style="padding: 0px; margin: 0px; color: white;" href="/appointment/doctor/<%=doctors[i]._id%>/7">9.00 - 9:30</a></button><button style="margin: 5px;padding: 5px;background-color: rgb(85, 197, 122);"><a style="padding: 0px; margin: 0px; color: white;" href="/appointment/doctor/<%=doctors[i]._id%>/8">9.00 - 9:30</a></button><button style="margin: 5px;padding: 5px;background-color: rgb(85, 197, 122);"><a style="padding: 0px; margin: 0px; color: white;" href="/appointment/doctor/<%=doctors[i]._id%>/9">9.00 - 9:30</a></button>
+                  <button style="margin: 5px;padding: 5px;background-color: rgb(85, 197, 122);"><a style="padding: 0px; margin: 0px; color: white;" href="/appointment/doctor/<%=doctors[i]._id%>/11">9.00 - 9:30</a></button><button style="margin: 5px;padding: 5px;background-color: rgb(85, 197, 122);"><a style="padding: 0px; margin: 0px; color: white;" href="/appointment/doctor/<%=doctors[i]._id%>/11">9.00 - 9:30</a></button><button style="margin: 5px;padding: 5px;background-color: rgb(85, 197, 122)"><a style="padding: 0px; margin: 0px; color: white;" href="/appointment/doctor/<%=doctors[i]._id%>/10">9.00 - 9:30</a></button>  
+
                 </div></td>
                 <td></td>
                 </tr>

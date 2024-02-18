@@ -178,9 +178,25 @@ app.post("/upload/:id", upload1.single("photo"), async (req, res) => {
   // Save the photo to the database
 });
 
-app.get("/appointment/doctor/:id", async (req, res) => {
+app.get("/appointment/doctor/:id/:slot", async (req, res) => {
   const patient_id = req.user._id;
   const hospital_id = req.params.id;
+  const slots = [
+    "9.00-9.30",
+    "9.30-10.00",
+    "10.00-10.30",
+    "10.30-11.00",
+    "11.00-11.30",
+    "11.30-12.00",
+    "1.00-1.30",
+    "1.30-2.00",
+    "2.00-2.30",
+    "2.30-3.00",
+    "3.00-3.30",
+    "3.30-4.00",
+  ];
+
+  const slot = slots[req.params.slot];
   // Validate hospital_id and patient_id
   if (!hospital_id || !patient_id) {
     return res
@@ -204,7 +220,7 @@ app.get("/appointment/doctor/:id", async (req, res) => {
   const appointment = new Appointment({
     hospital_id: hospital_id,
     patient_id: patient_id,
-  });
+    appointment_time:  slot,  });
   await appointment.save();
 
   return res.status(200).json({ message: "Appointment created successfully" });

@@ -45,6 +45,7 @@ const DocSchema = new Schema({
     type: Number,
     default: 0,
   },
+  slot: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 });
 
 DocSchema.plugin(passportLocalMongoose);
