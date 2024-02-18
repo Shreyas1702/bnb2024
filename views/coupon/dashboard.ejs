@@ -135,11 +135,24 @@
               <td><%=patients[i][0].phn%></td>
               <td><%=patients[i][0].adno%></td>
               <td><%=patients[i][0].gen%></td>
-              <td><div>
-                <a href="/verify/user/<%=patients[i][0].Patient_id%>">
-                  <h3>Approve Appointment</h3>
-                </a>
-              </div></td>
+              <td>
+                <div>
+                  <a href="#" id="showFormLink">
+                    <h3>Approve Appointment</h3>
+                  </a>
+                  <a href="#" id="showForm">Show Form</a>
+                  <form id="myForm" action="/approve/user/<%=patients[i][0].Patient_id%>" style="display: none;" method="post">
+                    <label for="field1">Date:</label>
+                    <input type="text" id="field1" name="date"><br>
+                    <label for="field2">Timing:</label>
+                    <input type="text" id="field2" name="timing"><br>
+                    <label for="field3">Fee:</label>
+                    <input type="number" id="field3" name="amount"><br>
+                    <button type="submit">Submit</button>
+                  </form>
+                </div>
+              </td>
+              
               </tr>
               <% } %>
           </tbody>
@@ -355,66 +368,66 @@
           class="form"
           method="post"
           onsubmit="return validateDatas()"
-          action="/generate-coupons"
-        >
-          <div>
+       >
+          <!-- <div>
             <label>No. of coupons</label>
             <input type="number" name="numCodes" id="numCodes" />
-          </div>
-          <div>
+          </div> -->
+          <!-- <div>
             <label>Redemption limit</label>
             <input type="number" name="redemptionLimit" id="redemptionLimit" />
-          </div>
+          </div> -->
+          
           <div>
-            <label for="format">Format</label>
+            <label for="format">Language</label>
             <select class="formselect" name="format" id="format">
-              <option value="alphabetic">Alphabetic</option>
-              <option value="numeric">Numeric</option>
-              <option value="alphanumeric">Alpha Numeric</option>
+              <option value="alphabetic">Hindi</option>
+              <option value="numeric">Marathi</option>
+              <option value="alphanumeric">English</option>
             </select>
           </div>
-
+<!-- 
           <div>
             <label>Custom Prefix</label>
             <input type="text" name="customPrefix" id="customPrefix" />
-          </div>
+          </div> -->
 
-          <div>
+          <!-- <div>
             <label>Applicable to</label>
             <input type="text" name="applicableTo" id="applicableTo" />
-          </div>
+          </div> -->
 
-          <div>
+          <!-- <div>
             <label>Discount type</label>
             <select for="type" name="discountType" id="discountType">
               <option value="amount">Price</option>
               <option value="percentage">Percentage</option>
             </select>
+          </div> -->
+
+          <div>
+            <label> Timing</label>
+            <input type="text" name="timing" id="discount_number" />
           </div>
 
           <div>
-            <label>Discount number</label>
-            <input type="number" name="discount_number" id="discount_number" />
-          </div>
-
-          <div>
-            <label>Max discount amount</label>
+            <label>Fee</label>
             <input
               type="number"
-              name="maxDiscountAmount"
+              name="amount"
               id="maxDiscountAmount"
             />
           </div>
 
-          <div>
+          <!-- <div>
             <label>Length of code</label>
             <input type="number" name="length" id="length" />
-          </div>
+          </div> -->
 
-          <div>
+         <div>
             <label>Expiry</label>
-            <input type="date" name="expiry" id="expiry" />
-          </div>
+            <input type="date" name="date" id="expiry" />
+          </div> 
 
           <!-- <div>
             <label>Conditions</label>
@@ -424,19 +437,35 @@
             <label for="minbill">Minimum Quantity</label>
           </div> -->
 
-          <div>
+          <!-- <div>
             <label>Value for condition</label>
             <input type="text" id="condition" name="condition" />
-          </div>
+          </div> -->
 
           <div class="buttonbar">
-            <button class="conf" onclick="closeCModal()">Confirm</button>
+            <button class="conf" type="submit">Confirm</button>
             <button class="cancel" onclick="closeCModal()">Cancel</button>
           </div>
+
+          </form>
         </form>
       </div>
     </div>
+<script>
+document.getElementById("showFormLink").addEventListener("click", function(event) {
+  event.preventDefault(); // Prevent the default action of the link
+  document.getElementById("myForm").style.display = "block"; // Display the form
+});
 
+// document.addEventListener("click", function(event) {
+//   if (event.target.classList.contains("showForm")) {
+//     event.preventDefault(); // Prevent the default action of the link
+//     const form = event.target.nextElementSibling; // Get the next sibling which is the form
+//     form.style.display = "block"; // Display the form
+//   }
+// });
+
+</script>
     <script src="/javascript/dash.js"></script>
   </body>
 </html>

@@ -214,11 +214,35 @@ app.get("/doctor/type/:id", async (req, res) => {
   const type = req.params.id;
   var doctors = await Hospital.find({ specialization: type });
   console.log(doctors);
-  res.render("coupon/dashboard_user", { doctors });
+  var appo=[]
+  res.render("coupon/dashboard_user", { doctors,appo });
 });
 module.exports = app;
 
 app.get("/coupon/dashboard_user", async (req, res) => {
   const doctors = await Hospital.find();
-  res.render("coupon/dashboard_user", { doctors });
+  var appo=await Appointment.find({patient_id:req.user._id})
+  if (appo.length>0){
+    var docdetail=[]
+    for(i=0;i<appo.length;i++){
+      var j=await Hospital.find({_id:appo[i].hospital_id})
+       docdetail.push(j)
+    }
+    console.log(docdetail)
+  res.render("coupon/dashboard_user", { doctors,appo,docdetail});}
+  else{
+    res.render("coupon/dashboard_user", { doctors,appo });
+  }
 });
+app.post('/approve/user/:id',async(req,res)=>{
+  const doc_id=req.user._id;
+  const pat_id=req.params.id;
+  console.log(doc_id,pat_id)
+  console.log(req.body.time)
+  var hosp_id=await Hospital.findOne({doctor_id:doc_id})
+  console.log('doctor:',hosp_id._id)
+  var appo=await Appointment.updateOne({hospital_id:hosp_id._id,patient_id:pat_id},{duePay:req.body.amount,
+    appointment_time:req.body.timing,date:req.body.date,})
+    res.send('success')
+
+})

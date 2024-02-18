@@ -14,8 +14,8 @@ const AppointmentSchema = new Schema({
         type: String,
         
     },
-    duration: {
-        type: Number, // Duration of appointment in minutes
+    date: {
+        type: String, // Duration of appointment in minutes
         
     },
     notes: String // Additional notes for the appointment

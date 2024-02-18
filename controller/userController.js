@@ -136,6 +136,7 @@ module.exports.login = async (req, res) => {
       console.log(patients);
       res.render("coupon/dashboard", { appointments, patients });
     } else {
+      
       res.redirect("/coupon/dashboard_user");
     }
   } catch (e) {
