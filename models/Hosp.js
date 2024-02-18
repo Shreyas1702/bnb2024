@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 const passportLocalMongoose = require("passport-local-mongoose");
 
 const DocSchema = new Schema({
-  doctor_id: [
+  doctor_id: 
     {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-  ],
+ 
   email: {
     type: String,
     required: true,
@@ -45,7 +45,7 @@ const DocSchema = new Schema({
     type: Number,
     default: 0,
   },
-  slot: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  slot:[]
 });
 
 DocSchema.plugin(passportLocalMongoose);

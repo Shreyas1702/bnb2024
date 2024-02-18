@@ -119,7 +119,7 @@
                 <th>Patient ID</th>
                 <th>Patient name</th>
                 <th>Phone no</th>
-                <th>Aadhar no.</th>
+                <th>Slot Timing</th>
                 <th>Gender</th>
                 <th>Approve</th>
                 <th></th>
@@ -127,13 +127,14 @@
               </tr>
             </thead>
           <tbody>
+            <% if (appointments.length>0) {%>
             <% for (var i =0; i <appointments.length;  i++ ) { %>
               <%= console.log(patients[i][0])%>
               <tr>
               <td><%=patients[i][0].Patient_id%></td>
               <td><%=patients[i][0].username%></td>
               <td><%=patients[i][0].phn%></td>
-              <td><%=patients[i][0].adno%></td>
+              <td><%= appointments[i].appointment_time%></td>
               <td><%=patients[i][0].gen%></td>
               <td>
                 <div>
@@ -141,11 +142,10 @@
                     <h3>Approve Appointment</h3>
                   </a>
                   <a href="#" id="showForm">Show Form</a>
-                  <form id="myForm" action="/approve/user/<%=patients[i][0].Patient_id%>" style="display: none;" method="post">
+                  <form id="myForm" action="/approve/user/<%=patients[i][0].Patient_id%>/<%= appointments[i].appointment_time%>" style="display: none;" method="post">
                     <label for="field1">Date:</label>
                     <input type="text" id="field1" name="date"><br>
-                    <label for="field2">Timing:</label>
-                    <input type="text" id="field2" name="timing"><br>
+                   
                     <label for="field3">Fee:</label>
                     <input type="number" id="field3" name="amount"><br>
                     <button type="submit">Submit</button>
@@ -154,6 +154,7 @@
               </td>
               
               </tr>
+              <%}%>
               <% } %>
           </tbody>
           </table>
