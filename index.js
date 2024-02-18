@@ -216,9 +216,87 @@ app.get("/doctor/type/:id", async (req, res) => {
   console.log(doctors);
   res.render("coupon/dashboard_user", { doctors });
 });
-module.exports = app;
+
+module.exports.payment = async (req, res, next) => {
+  console.log("Payment");
+  let amount = req.body.amount;
+
+  console.log(amount);
+  console.log("payment gateway");
+  const instance = new Razorpay({
+    key_id: "rzp_test_FMCCYhAfIQ7C1z",
+    key_secret: "6r5J9tE1WRjuqz3eNuUxAP9Y",
+  });
+
+  const order = await instance.orders.create({
+    amount: amount * 100,
+    currency: "INR",
+    receipt: "receipt#1",
+  });
+
+  res.status(201).json({
+    success: true,
+    order,
+  });
+};
+
+module.exports.save = async (req, res, next) => {
+  console.log(req.body.data);
+  const data = req.body.data;
+  const art = await Artwork.findById(data.id);
+  const sale = new Sale(req.body.data);
+  const user = await User.findById(req.user.id);
+  console.log(data.amount);
+  const data1 = {
+    art_id: data.id,
+    amount: data.amount,
+  };
+  user.purchased.push(data1);
+  sale.Buyer = req.user.id;
+  art.soldTo = req.user.id;
+  art.sold = true;
+  await art.save();
+  await user.save();
+  await sale.save();
+  res.send(art);
+};
+
+module.exports.verify = async (req, res) => {
+  console.log("verification");
+  console.log(req.body.data);
+  const data = req.body.data;
+  razorpay_payment_id = data.razorpay_payment_id;
+  order_id = data.order_id;
+  razorpay_signature = data.signature;
+  secret = "6r5J9tE1WRjuqz3eNuUxAP9Y";
+
+  console.log(order_id);
+  console.log(razorpay_payment_id);
+
+  body = order_id + "|" + razorpay_payment_id;
+  body = body.toString();
+  var expectedSignature = crypto
+    .createHmac("sha256", secret)
+    .update(body)
+    .digest("hex");
+  console.log(expectedSignature);
+  console.log(razorpay_signature);
+  if (expectedSignature === razorpay_signature) {
+    console.log("payment is successful");
+  } else {
+    console.log("not");
+  }
+
+  console.log("razorpay");
+
+  res.status(200).json({
+    success: true,
+  });
+};
 
 app.get("/coupon/dashboard_user", async (req, res) => {
   const doctors = await Hospital.find();
   res.render("coupon/dashboard_user", { doctors });
 });
+
+module.exports = app;
