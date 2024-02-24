@@ -254,4 +254,30 @@ app.post("/change/:name", async (req, res) => {
   });
 });
 
+app.post("/changes/:name", async (req, res) => {
+  var { name } = req.params;
+  name = name.toLowerCase();
+  console.log(name);
+  const user = await User.findById(req.user._id);
+  console.log(`user.${name}`);
+  console.log(user.tractor);
+  console.log(req.body.data);
+
+  if (name == "potato") {
+    user.potato = req.body.data;
+  } else if (name == "rice") {
+    user.rice = req.body.data;
+  } else if (name == "wheat") {
+    user.wheat = req.body.data;
+  } else if (name == "tomato") {
+    user.tomato = req.body.data;
+  } else {
+    user.corn = req.body.data;
+  }
+  await user.save();
+  res.status(200).json({
+    success: true,
+  });
+});
+
 module.exports = app;

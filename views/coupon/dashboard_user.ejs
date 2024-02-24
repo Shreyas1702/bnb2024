@@ -50,12 +50,12 @@
               <span class="close" onclick="closeModal()">&times;</span>
               <div
                 class="flt"
-                style="display: flex; flex-direction: row; font-size: 15px"
+                style="display: flex; flex-direction: row; font-size: 20px"
               >
                 <p style="color: black">Tool Name :- &nbsp;</p>
-                <h4 id="tool" style="font-size: 15px; color: #55c57a"></h4>
+                <h4 id="tool" style="font-size: 20px; color: #55c57a"></h4>
               </div>
-              <p style="font-size: 15px; margin-top: 10px; color: black">
+              <p style="font-size: 20px; margin-top: 10px; color: black">
                 Enter the amount:
               </p>
               <input
@@ -66,14 +66,49 @@
               />
               <button
                 style="
-                  margin-left: 6px;
+                  margin-left: 25px;
                   padding: 8px;
                   background-color: #55c57a;
                   color: white;
-                  font-size: 15px;
+                  font-size: 20px;
                 "
                 id="Submit"
                 onclick="uploadFiles(event)"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+
+          <div id="myModals" class="modal">
+            <div class="modal-content" style="width: 400px">
+              <span class="close" onclick="closeModals()">&times;</span>
+              <div
+                class="flt"
+                style="display: flex; flex-direction: row; font-size: 20px"
+              >
+                <p style="color: black">Seed Name :- &nbsp;</p>
+                <h4 id="seed" style="font-size: 20px; color: #55c57a"></h4>
+              </div>
+              <p style="font-size: 20px; margin-top: 20px; color: black">
+                Enter the amount:
+              </p>
+              <input
+                type="number"
+                name="amts"
+                id="amts"
+                style="border: 1px solid black; margin-top: 5px"
+              />
+              <button
+                style="
+                  margin-left: 25px;
+                  padding: 8px;
+                  background-color: #55c57a;
+                  color: white;
+                  font-size: 20px;
+                "
+                id="Submit"
+                onclick="uploadFile(event)"
               >
                 Submit
               </button>
@@ -247,8 +282,8 @@
             />
             <div class="middle">
               <div class="left">
-                <a href="#" onclick="openCModal()">
-                  <h1>Potatoes</h1>
+                <a href="#" onclick="openCModals()">
+                  <h1 onclick="changePo()">Potatoes</h1>
                 </a>
               </div>
             </div>
@@ -261,8 +296,8 @@
             />
             <div class="middle">
               <div class="left">
-                <a href="#" onclick="openCModal()">
-                  <h1>Wheat</h1>
+                <a href="#" onclick="openCModals()">
+                  <h1 onclick="changeW()">Wheat</h1>
                 </a>
               </div>
             </div>
@@ -276,8 +311,8 @@
             />
             <div class="middle">
               <div class="left">
-                <a href="#" onclick="openCModal()">
-                  <h1>Corn</h1>
+                <a href="#" onclick="openCModals()">
+                  <h1 onclick="changeC()">Corn</h1>
                 </a>
               </div>
             </div>
@@ -290,8 +325,8 @@
             />
             <div class="middle">
               <div class="left">
-                <a href="#" onclick="openCModal()">
-                  <h1>rice</h1>
+                <a href="#" onclick="openCModals()">
+                  <h1 onclick="changeR()">Rice</h1>
                 </a>
               </div>
             </div>
@@ -304,8 +339,8 @@
             />
             <div class="middle">
               <div class="left">
-                <a href="#" onclick="openCModal()">
-                  <h1>Tomato</h1>
+                <a href="#" onclick="openCModals()">
+                  <h1 onclick="changeTo()">Tomato</h1>
                 </a>
               </div>
             </div>
@@ -588,6 +623,9 @@
     <script src="/javascript/dash.js"></script>
     <script src="/javascript/script_report.js"></script>
     <script>
+      var modal = document.getElementById("myModal");
+      var modals = document.getElementById("myModals");
+
       function changeT() {
         console.log("Tractor");
         const data = document.getElementById("tool");
@@ -622,7 +660,54 @@
           data: amt,
         });
         console.log(datas);
+
+        modal.style.display = "none";
       }
+
+      /*************************************************************Seeds Data *************************************************************/
+
+      function changeTo() {
+        const data = document.getElementById("seed");
+        data.innerHTML = "Tomato";
+      }
+      function changeW() {
+        const data = document.getElementById("seed");
+        data.innerHTML = "Wheat";
+      }
+      function changePo() {
+        const data = document.getElementById("seed");
+        data.innerHTML = "Potato";
+      }
+      function changeR() {
+        const data = document.getElementById("seed");
+        data.innerHTML = "Rice";
+      }
+      function changeC() {
+        const data = document.getElementById("seed");
+        data.innerHTML = "Corn";
+      }
+
+      function uploadFile(event) {
+        event.preventDefault();
+        const data = document.getElementById("seed").textContent;
+        const amts = document.getElementById("amts").value;
+        const datas = axios.post(`http://localhost:3000/changes/${data}`, {
+          data: amts,
+        });
+        console.log(datas);
+
+        modal.style.display = "none";
+      }
+
+      window.onclick = function (event) {
+        console.log("Closed");
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+        if (event.target == modals) {
+          modals.style.display = "none";
+        }
+      };
     </script>
   </body>
 </html>
