@@ -204,7 +204,18 @@ header h2 {
     height: 55px;
     display: flex;
     align-items: center;
-    visibility: hidden;
+    visibility: hidden; 
+    font-size: 1.35rem;
+}
+
+mic-icon {
+    align-self: flex-end;
+    color: #ffd700;
+    cursor: pointer;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    /* visibility: hidden;  */
     font-size: 1.35rem;
 }
 
