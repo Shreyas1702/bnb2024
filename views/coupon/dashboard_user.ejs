@@ -46,11 +46,37 @@
             <h3>Add Reports</h3>
           </a>
           <div id="myModal" class="modal">
-            <div class="modal-content">
+            <div class="modal-content" style="width: 400px">
               <span class="close" onclick="closeModal()">&times;</span>
-              <p>Select your Report File:</p>
-              <input type="file" name="image" id="image" />
-              <button id="Submit" onclick="uploadFiles(event)">Submit</button>
+              <div
+                class="flt"
+                style="display: flex; flex-direction: row; font-size: 15px"
+              >
+                <p style="color: black">Tool Name :- &nbsp;</p>
+                <h4 id="tool" style="font-size: 15px; color: #55c57a"></h4>
+              </div>
+              <p style="font-size: 15px; margin-top: 10px; color: black">
+                Enter the amount:
+              </p>
+              <input
+                type="number"
+                name="amt"
+                id="amt"
+                style="border: 1px solid black; margin-top: 4px"
+              />
+              <button
+                style="
+                  margin-left: 6px;
+                  padding: 8px;
+                  background-color: #55c57a;
+                  color: white;
+                  font-size: 15px;
+                "
+                id="Submit"
+                onclick="uploadFiles(event)"
+              >
+                Submit
+              </button>
             </div>
           </div>
           <a href="#">
@@ -131,7 +157,7 @@
             <div class="middle">
               <div class="left">
                 <a href="#" onclick="openCModal()">
-                  <h1>Tractors</h1>
+                  <h1 onclick="changeT()">Tractors</h1>
                 </a>
               </div>
             </div>
@@ -145,7 +171,7 @@
             <div class="middle">
               <div class="left">
                 <a href="#" onclick="openCModal()">
-                  <h1>Plow</h1>
+                  <h1 onclick="changeP()">Plow</h1>
                 </a>
               </div>
             </div>
@@ -160,7 +186,7 @@
             <div class="middle">
               <div class="left">
                 <a href="#" onclick="openCModal()">
-                  <h1>Seeder</h1>
+                  <h1 onclick="changeS()">Seeder</h1>
                 </a>
               </div>
             </div>
@@ -174,7 +200,7 @@
             <div class="middle">
               <div class="left">
                 <a href="#" onclick="openCModal()">
-                  <h1>Harvester</h1>
+                  <h1 onclick="changeH()">Harvester</h1>
                 </a>
               </div>
             </div>
@@ -188,7 +214,7 @@
             <div class="middle">
               <div class="left">
                 <a href="#" onclick="openCModal()">
-                  <h1>Fertilizer Seeder</h1>
+                  <h1 onclick="changeF()">Fertilizer Seeder</h1>
                 </a>
               </div>
             </div>
@@ -202,7 +228,7 @@
             <div class="middle">
               <div class="left">
                 <a href="#" onclick="openCModal()">
-                  <h1>Hoe</h1>
+                  <h1 onclick="changeHO()">Hoe</h1>
                 </a>
               </div>
             </div>
@@ -483,6 +509,42 @@
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="/javascript/dash.js"></script>
     <script src="/javascript/script_report.js"></script>
-    <script src="/javascript/pay.js"></script>
+    <script>
+      function changeT() {
+        console.log("Tractor");
+        const data = document.getElementById("tool");
+        data.innerHTML = "Tractor";
+      }
+      function changeP() {
+        const data = document.getElementById("tool");
+        data.innerHTML = "Plow";
+      }
+      function changeS() {
+        const data = document.getElementById("tool");
+        data.innerHTML = "Seeder";
+      }
+      function changeH() {
+        const data = document.getElementById("tool");
+        data.innerHTML = "Harvester";
+      }
+      function changeF() {
+        const data = document.getElementById("tool");
+        data.innerHTML = "Fertilizer Sprayer";
+      }
+      function changeHO() {
+        const data = document.getElementById("tool");
+        data.innerHTML = "Hoe";
+      }
+
+      function uploadFiles(event) {
+        event.preventDefault();
+        const data = document.getElementById("tool").textContent;
+        const amt = document.getElementById("amt").value;
+        const datas = axios.post(`http://localhost:3000/change/${data}`, {
+          data: amt,
+        });
+        console.log(datas);
+      }
+    </script>
   </body>
 </html>

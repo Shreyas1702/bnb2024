@@ -25,7 +25,6 @@ const multer = require("multer");
 const FormData = require("form-data");
 const axios = require("axios");
 const upload = multer();
-const Patient = require("./models/Patient");
 const Hospital = require("./models/Hosp");
 const Appointment = require("./models/Appointment");
 app.use(
@@ -227,87 +226,32 @@ app.get("/appointment/doctor/:id/:slot", async (req, res) => {
   return res.status(200).json({ message: "Appointment created successfully" });
 });
 
-app.get("/doctor/type/:id", async (req, res) => {
-  const type = req.params.id;
-  var doctors = await Hospital.find({ specialization: type });
-  console.log(doctors);
-  var appo = [];
-  res.render("coupon/dashboard_user", { doctors, appo });
-});
+app.post("/change/:name", async (req, res) => {
+  var { name } = req.params;
+  name = name.toLowerCase();
+  console.log(name);
+  const user = await User.findById(req.user._id);
+  console.log(`user.${name}`);
+  console.log(user.tractor);
+  console.log(req.body.data);
 
-app.get("/coupon/dashboard_user", async (req, res) => {
-  const doctors = await Hospital.find();
-  var appo = await Appointment.find({ patient_id: req.user._id });
-  if (appo.length > 0) {
-    var docdetail = [];
-    for (i = 0; i < appo.length; i++) {
-      var j = await Hospital.find({ _id: appo[i].hospital_id });
-      docdetail.push(j);
-    }
-    console.log(docdetail);
-    res.render("coupon/dashboard_user", { doctors, appo, docdetail });
+  if (name == "tractor") {
+    user.tractor = req.body.data;
+  } else if (name == "plow") {
+    user.plow = req.body.data;
+  } else if (name == "seeder") {
+    user.seeder = req.body.data;
+  } else if (name == "harvester") {
+    user.harvester = req.body.data;
+  } else if (name == "hoe") {
+    user.hoe = req.body.data;
   } else {
-    res.render("coupon/dashboard_user", { doctors, appo });
+    user.f_spreader = req.body.data;
   }
-});
-
-app.post("/approve/user/:id/:slot", async (req, res) => {
-  const doc_id = req.user._id;
-  const pat_id = req.params.id;
-  console.log(req.params.slot);
-
-  // Assuming req.params.slot contains the index of the slot to be updated
-  const slots = [
-    "9.00-9.30",
-    "9.30-10.00",
-    "10.00-10.30",
-    "10.30-11.00",
-    "11.00-11.30",
-    "11.30-12.00",
-    "1.00-1.30",
-    "1.30-2.00",
-    "2.00-2.30",
-    "2.30-3.00",
-    "3.00-3.30",
-    "3.30-4.00",
-  ];
-
-  const slotsObject = {};
-  for (let i = 0; i < slots.length; i++) {
-    slotsObject[slots[i]] = i;
-  }
-
-  console.log(slotsObject);
-  const slotdown = slotsObject[req.params.slot];
-
-  var updateQuery = {
-    duePay: req.body.amount,
-
-    date: req.body.date,
-  };
-
-  var appo = await Appointment.updateOne(
-    { hospital_id: req.user._id, patient_id: pat_id },
-    updateQuery
-  );
-
-  console.log(doc_id, pat_id);
-  var hosp_id = await Hospital.findOne({ doctor_id: doc_id });
-  console.log("doctor:", hosp_id._id);
-  hosp_id.slot[slotdown] = false;
-
-  // appointment.duePay=req.body.amount,
-  // appointment.date=req.body.date,
-
-  await hosp_id.save();
-  // updateQuery[`slot.${slotdown}`] = false;
-
-  // var appo = await Appointment.updateOne(
-  //   { hospital_id: hosp_id._id, patient_id: pat_id },
-  //   updateQuery
-  // );
-  console.log(hosp_id);
-  res.send("success");
+  await user.save();
+  res.status(200).json({
+    success: true,
+  });
 });
 
 module.exports = app;
