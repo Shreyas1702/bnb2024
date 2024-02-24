@@ -1,6 +1,8 @@
 /* Import Google font - Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
+
+
 * {
     margin: 0;
     padding: 0;
@@ -204,22 +206,17 @@ header h2 {
     height: 55px;
     display: flex;
     align-items: center;
-    visibility: hidden; 
+    visibility: hidden;
     font-size: 1.35rem;
 }
 
-mic-icon {
-    align-self: flex-end;
-    color: #ffd700;
-    cursor: pointer;
-    height: 55px;
-    display: flex;
-    align-items: center;
-    /* visibility: hidden;  */
-    font-size: 1.35rem;
+
+
+.chat-input textarea:valid~.material-symbols-rounded {
+    visibility: visible;
 }
 
-.chat-input textarea:valid~span {
+.chat-input textarea:invalid~.mic-icon {
     visibility: visible;
 }
 

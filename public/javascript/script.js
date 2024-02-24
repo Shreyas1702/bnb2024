@@ -3,66 +3,160 @@ const closeBtn = document.querySelector(".close-btn");
 const chatbox = document.querySelector(".chatbox");
 const chatInput = document.querySelector(".chat-input textarea");
 const sendChatBtn = document.querySelector(".chat-input span");
-let className = "incoming";
+let serviceSel = null;
 let userMessage = null; // Variable to store user's message
-const API_KEY = "PASTE-YOUR-API-KEY"; // Paste your API key here
 const inputInitHeight = chatInput.scrollHeight;
-const micIcon = document.getElementById('mic-icon');
+let selectedEquipments = {}; // Object to store selected equipments and their amounts
+let chatState = "start"; // Initial state
+let option = null;
+let amount = 0;
+//const micIcon = document.getElementById("mic-icon");
+//const sendBtn = document.getElementById("send-btn");
+
 const createChatLi = (message, className) => {
     // Create a chat <li> element with passed message and className
     const chatLi = document.createElement("li");
     chatLi.classList.add("chat", `${className}`);
-    let chatContent = (className === "outgoing") ? `<span><i class="fa fa-microphone" style="font-size:24px"></span>` : `<span class="material-symbols-outlined">smart_toy</span><p></p>`;
+    let chatContent = className === "outgoing" ? `<p></p>` : `<span class="material-symbols-outlined">smart_toy</span><p></p>`;
     chatLi.innerHTML = chatContent;
     chatLi.querySelector("p").textContent = message;
     return chatLi; // return chat <li> element
 }
 
-const generateResponse = (chatElement) => {
-    const API_URL = "https://api.openai.com/v1/chat/completions";
-    const messageElement = chatElement.querySelector("p");
-
-    // Define the properties and message for the API request
-    const requestOptions = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${API_KEY}`
-        },
-        body: JSON.stringify({
-            model: "gpt-3.5-turbo",
-            messages: [{role: "user", content: userMessage}],
-        })
-    }
-
-    // Send POST request to API, get response and set the reponse as paragraph text
-    fetch(API_URL, requestOptions).then(res => res.json()).then(data => {
-        messageElement.textContent = data.choices[0].message.content.trim();
-    }).catch(() => {
-        messageElement.classList.add("error");
-        messageElement.textContent = "Oops! Something went wrong. Please try again.";
-    }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
+const appendMessage = (message, className) => {
+    const chatLi = createChatLi(message, className);
+    chatbox.appendChild(chatLi);
+    chatbox.scrollTo(0, chatbox.scrollHeight);
 }
 
 const handleChat = () => {
     userMessage = chatInput.value.trim(); // Get user entered message and remove extra whitespace
-    if(!userMessage) return;
+    if (!userMessage) return;
+
+    switch (chatState) {
+        case "start":
+            // Check if the user selected option 1 for equipment service
+            if (userMessage === "1") {
+                // Display the response for selecting equipment service
+                const responseMessage = "You have chosen equipment registration. Please select the equipment: A - Tractor, B - Plow, C - Seeder, D - Harvester, E - Fertilizer Sprayer, F - Hoe, G - Sprayer, H - Tiller";
+                serviceSel = "EquipmentReg";
+                appendMessage(userMessage, "outgoing");
+                setTimeout(() => {
+                    chatbox.scrollTo(0, chatbox.scrollHeight);
+                    appendMessage(responseMessage, "incoming");
+                }, 300);
+
+                chatState = "equipmentSelection"; // Update state
+            }
+            if (userMessage === "2") {
+                // Display the response for selecting equipment service
+                serviceSel = "SeedReg";
+                const responseMessage = "You have chosen seed registration. Please select the equipment: A - Wheat, B - Corn, C - Rice, D - Potato, E - Tomato";
+                appendMessage(userMessage, "outgoing");
+                setTimeout(() => {
+                    chatbox.scrollTo(0, chatbox.scrollHeight);
+                    appendMessage(responseMessage, "incoming");
+                }, 300);
+
+                chatState = "equipmentSelection"; // Update state
+            }
+            break;
+        case "equipmentSelection":
+            // If user selects equipment A or B
+            if (serviceSel === "EquipmentReg") {
+                const equipmentOptions = {
+                    A: "Tractor",
+                    B: "Plow",
+                    C: "Seeder",
+                    D: "Harvester",
+                    E: "Fertilizer Sprayer",
+                    F: "Hoe",
+                    G: "Sprayer",
+                    H: "Tiller"
+                };
+
+                if (Object.keys(equipmentOptions).includes(userMessage)) {
+                    // If user selects equipment, prompt for the amount
+                    const selectedEquipment = equipmentOptions[userMessage];
+                    const responseMessage = `You have chosen ${selectedEquipment}. Please enter the amount:`;
+                    appendMessage(userMessage, "outgoing");
+                    setTimeout(() => {
+                        chatbox.scrollTo(0, chatbox.scrollHeight);
+                        appendMessage(responseMessage, "incoming");
+                    }, 300);
+                    chatState = "amountEntry"; // Update state
+                    option = selectedEquipment;
+                } else {
+                    // If user enters invalid input in the equipment selection state
+                    setTimeout(() => {
+                        chatbox.scrollTo(0, chatbox.scrollHeight);
+                        appendMessage("Invalid input. Please enter a valid option.", "incoming");
+                    }, 300);
+                }
+            } else if (serviceSel === "SeedReg") {
+                const seedOptions = {
+                    A: "Wheat",
+                    B: "Corn",
+                    C: "Rice",
+                    D: "Potato",
+                    E: "Tomato"
+                };
+
+                if (Object.keys(seedOptions).includes(userMessage)) {
+                    // If user selects seed, prompt for the amount
+                    const selectedSeed = seedOptions[userMessage];
+                    const responseMessage = `You have chosen ${selectedSeed}. Please enter the amount:`;
+                    appendMessage(userMessage, "outgoing");
+                    setTimeout(() => {
+                        chatbox.scrollTo(0, chatbox.scrollHeight);
+                        appendMessage(responseMessage, "incoming");
+                    }, 300);
+                    chatState = "amountEntry"; // Update state
+                    option = selectedSeed;
+                } else {
+                    // If user enters invalid input in the seed selection state
+                    setTimeout(() => {
+                        chatbox.scrollTo(0, chatbox.scrollHeight);
+                        appendMessage("Invalid input. Please enter a valid option.", "incoming");
+                    }, 300);
+                }
+            }
+            break;
+        case "amountEntry":
+            amount = parseInt(userMessage);
+            if (isNaN(amount)) {
+                setTimeout(() => {
+                    chatbox.scrollTo(0, chatbox.scrollHeight);
+                    appendMessage("Invalid input. Please enter a number for the amount.", "incoming");
+                }, 300);
+            } else {
+                // Notify the user about the selected equipment and amount
+                appendMessage(userMessage, "outgoing");
+                const responseMessage = `You have ${amount} ${option}.`;
+                setTimeout(() => {
+                    chatbox.scrollTo(0, chatbox.scrollHeight);
+                    appendMessage(responseMessage, "incoming");
+                }, 300);
+
+                const nextMessage = "Please select the type of registration: 1 - Equipment Registration, 2 - Seed Registration";
+            setTimeout(() => {
+                chatbox.scrollTo(0, chatbox.scrollHeight);
+                appendMessage(nextMessage, "incoming");
+            }, 600);
+
+            console.log("Amount:", amount);
+            console.log("Option:", option);
+                chatState = "start"; // Reset state to start for next interaction
+            }
+            break;
+        default:
+            // Invalid state
+            console.error("Invalid chat state");
+    }
 
     // Clear the input textarea and set its height to default
     chatInput.value = "";
     chatInput.style.height = `${inputInitHeight}px`;
-
-    // Append the user's message to the chatbox
-    chatbox.appendChild(createChatLi(userMessage, "outgoing"));
-    chatbox.scrollTo(0, chatbox.scrollHeight);
-    
-    setTimeout(() => {
-        // Display "Thinking..." message while waiting for the response
-        const incomingChatLi = createChatLi("Thinking...", "incoming");
-        chatbox.appendChild(incomingChatLi);
-        chatbox.scrollTo(0, chatbox.scrollHeight);
-        generateResponse(incomingChatLi);
-    }, 600);
 }
 
 chatInput.addEventListener("input", () => {
@@ -74,7 +168,7 @@ chatInput.addEventListener("input", () => {
 chatInput.addEventListener("keydown", (e) => {
     // If Enter key is pressed without Shift key and the window 
     // width is greater than 800px, handle the chat
-    if(e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+    if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
         e.preventDefault();
         handleChat();
     }
@@ -83,3 +177,4 @@ chatInput.addEventListener("keydown", (e) => {
 sendChatBtn.addEventListener("click", handleChat);
 closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
 chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
+
