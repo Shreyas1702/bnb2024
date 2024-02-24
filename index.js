@@ -220,7 +220,8 @@ app.get("/appointment/doctor/:id/:slot", async (req, res) => {
   const appointment = new Appointment({
     hospital_id: hospital_id,
     patient_id: patient_id,
-    appointment_time:  slot,  });
+    appointment_time: slot,
+  });
   await appointment.save();
 
   return res.status(200).json({ message: "Appointment created successfully" });
@@ -252,66 +253,61 @@ app.get("/coupon/dashboard_user", async (req, res) => {
 
 app.post("/approve/user/:id/:slot", async (req, res) => {
   const doc_id = req.user._id;
-const pat_id = req.params.id;
-console.log(req.params.slot)
+  const pat_id = req.params.id;
+  console.log(req.params.slot);
 
- // Assuming req.params.slot contains the index of the slot to be updated
-const slots = [
-  "9.00-9.30",
-  "9.30-10.00",
-  "10.00-10.30",
-  "10.30-11.00",
-  "11.00-11.30",
-  "11.30-12.00",
-  "1.00-1.30",
-  "1.30-2.00",
-  "2.00-2.30",
-  "2.30-3.00",
-  "3.00-3.30",
-  "3.30-4.00",
-];
+  // Assuming req.params.slot contains the index of the slot to be updated
+  const slots = [
+    "9.00-9.30",
+    "9.30-10.00",
+    "10.00-10.30",
+    "10.30-11.00",
+    "11.00-11.30",
+    "11.30-12.00",
+    "1.00-1.30",
+    "1.30-2.00",
+    "2.00-2.30",
+    "2.30-3.00",
+    "3.00-3.30",
+    "3.30-4.00",
+  ];
 
-const slotsObject = {};
-for (let i = 0; i < slots.length; i++) {
-  slotsObject[slots[i]] = i;
-}
+  const slotsObject = {};
+  for (let i = 0; i < slots.length; i++) {
+    slotsObject[slots[i]] = i;
+  }
 
-console.log(slotsObject);
-const slotdown = slotsObject[req.params.slot];
+  console.log(slotsObject);
+  const slotdown = slotsObject[req.params.slot];
 
-var updateQuery = {
-  duePay: req.body.amount,
- 
-  date: req.body.date,
-};
+  var updateQuery = {
+    duePay: req.body.amount,
 
+    date: req.body.date,
+  };
 
-var appo = await Appointment.updateOne(
-  { hospital_id:req.user._id, patient_id: pat_id },
-  updateQuery
-);
+  var appo = await Appointment.updateOne(
+    { hospital_id: req.user._id, patient_id: pat_id },
+    updateQuery
+  );
 
-
-
-console.log(doc_id, pat_id);
-var hosp_id = await Hospital.findOne({ doctor_id: doc_id });
-console.log("doctor:", hosp_id._id);
-hosp_id.slot[slotdown]=false;
-
+  console.log(doc_id, pat_id);
+  var hosp_id = await Hospital.findOne({ doctor_id: doc_id });
+  console.log("doctor:", hosp_id._id);
+  hosp_id.slot[slotdown] = false;
 
   // appointment.duePay=req.body.amount,
   // appointment.date=req.body.date,
 
-  await hosp_id.save()
-// updateQuery[`slot.${slotdown}`] = false;
+  await hosp_id.save();
+  // updateQuery[`slot.${slotdown}`] = false;
 
-// var appo = await Appointment.updateOne(
-//   { hospital_id: hosp_id._id, patient_id: pat_id },
-//   updateQuery
-// );
-console.log(hosp_id)
-res.send("success");
-
+  // var appo = await Appointment.updateOne(
+  //   { hospital_id: hosp_id._id, patient_id: pat_id },
+  //   updateQuery
+  // );
+  console.log(hosp_id);
+  res.send("success");
 });
 
 module.exports = app;
