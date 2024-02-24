@@ -7,6 +7,28 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  /* height: auto; */
+}
+.text {
+  position: absolute;
+  top: 180%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 20px;
+  font-size: 48px;
+  text-align: center;
+}
+
 body {
   color: white;
 }

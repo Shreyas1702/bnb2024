@@ -1,53 +1,76 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-const passportLocalMongoose = require('passport-local-mongoose')
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+const passportLocalMongoose = require("passport-local-mongoose");
 
 const UserSchema = new Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   username: {
     type: String,
     required: true,
     unique: true,
   },
-  comp_type: {
-    type: String,
+  pnumber: {
+    type: Number,
+    required: true,
   },
-  total_coupon_gen: {
+  tarea: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
+  tractor: {
     type: Number,
     default: 0,
   },
-  balance_bill: {
+  plow: {
     type: Number,
     default: 0,
   },
-  coupon_used: {
+  seeder: {
     type: Number,
     default: 0,
   },
-  relationship:{
-    type:String,
-    enum:['doc','pat'],
-    required:[true,'A relationship is important either doctor or patient']
+  harvester: {
+    type: Number,
+    default: 0,
   },
-  coupon: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Order',
-    },
-  ],
-})
+  f_spreader: {
+    type: Number,
+    default: 0,
+  },
+  hoe: {
+    type: Number,
+    default: 0,
+  },
+  sprayer: {
+    type: Number,
+    default: 0,
+  },
+  tiller: {
+    type: Number,
+    default: 0,
+  },
+  wheat: {
+    type: Number,
+    default: 0,
+  },
+  corn: {
+    type: Number,
+    default: 0,
+  },
+  rice: {
+    type: Number,
+    default: 0,
+  },
+  potato: {
+    type: Number,
+    default: 0,
+  },
+  tomato: {
+    type: Number,
+    default: 0,
+  },
+});
 
-// AssignmentSchema.virtual("no", {
-//   ref: "Order",
-//   foreignField: "Order._id",
-//   localField: "coupon",
-//   justOne: true,
-// });
+UserSchema.plugin(passportLocalMongoose);
 
-UserSchema.plugin(passportLocalMongoose)
-
-module.exports = mongoose.model('User', UserSchema)
+module.exports = mongoose.model("User", UserSchema);

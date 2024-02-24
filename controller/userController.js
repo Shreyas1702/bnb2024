@@ -24,32 +24,15 @@ module.exports.renderRegisterHosp = (req, res) => {
 module.exports.register = async (req, res, next) => {
   try {
     console.log(req.body);
-    const { email, username, password, ht, gen, st, adno, phn, wt, add, zc } =
-      req.body;
-    const relationship = "pat";
+    const { username, password, pnumber, area } = req.body;
 
     // comp_type = 'hosp'
-    const user = new User({ email, username, relationship });
+    const user = new User({ area, username, pnumber });
 
     const registeredUser = await User.register(user, password);
-    const Patient_id = registeredUser._id.toString();
-    console.log(registeredUser._id.toString());
-    const patientData = await Patient.create({
-      username,
-      Patient_id,
-      ht,
-      gen,
-      st,
-      adno,
-      phn,
-      wt,
-      add,
-      zc,
-      Patient_id,
-    });
     req.login(registeredUser, (err) => {
       if (err) return next(err);
-      res.render("users/photo", { id: Patient_id });
+      res.render("coupon/dashboard_user");
     });
   } catch (e) {
     req.flash("error", `${e.message}`);
@@ -68,21 +51,34 @@ module.exports.registerhosp = async (req, res, next) => {
     const Hosp_id = registeredUser._id.toString();
     console.log(registeredUser._id);
     console.log(registeredUser._id.toString());
-    var appointments=[]
-    slot=[true,true,true,true,true,true,true,true,true,true,true,true]
+    var appointments = [];
+    slot = [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+    ];
     const patientData = await Hospital.create({
-      doctor_id:Hosp_id,
+      doctor_id: Hosp_id,
       email,
       username,
       specialization,
       add,
       phn,
-      slot
+      slot,
     });
     req.login(registeredUser, (err) => {
       if (err) return next(err);
       console.log(req.user);
-      res.render("coupon/dashboard",{appointments});
+      res.render("coupon/dashboard", { appointments });
     });
   } catch (e) {
     req.flash("error", `${e.message}`);
@@ -104,7 +100,7 @@ module.exports.login = async (req, res) => {
       // console.log(req.user);
 
       // Check if hospital exists
-     
+
       // Get appointments for the hospital and populate patient
       //  var appointment = await Appointment.find({
       //   hospital_id: user,
@@ -113,7 +109,7 @@ module.exports.login = async (req, res) => {
       // var patient = await Patient.find({ Patient_id: id })
       // return res.status(200).json({ appoint{ments, patient })
       const hospital_id = await Hospital.findOne({ doctor_id: req.user._id });
-console.log('hospid',hospital_id)
+      console.log("hospid", hospital_id);
       // Check if hospital exists
       //  hospital = await Hospital.find({ Hosp_id: req.params.hospital_id });
       // if (!hospital) {
@@ -124,14 +120,14 @@ console.log('hospid',hospital_id)
       const appointments = await Appointment.find({
         hospital_id: hospital_id._id,
       }).populate("no");
-    
+
       var id;
       var patient;
       var patients = [];
       console.log(appointments.length);
       for (var i = 0; i < appointments.length; i++) {
-        id = appointments[i].patient_id.toString()
-console.log(id)
+        id = appointments[i].patient_id.toString();
+        console.log(id);
         patient = await Patient.find({ patient_id: id });
         patients.push(patient);
       }
