@@ -69,6 +69,10 @@ const UserSchema = new Schema({
     type: Number,
     default: 0,
   },
+  tll: {
+    type: Number,
+    default: 0,
+  },
   wot: {
     type: Number,
     default: 0,

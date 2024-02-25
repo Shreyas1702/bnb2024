@@ -304,11 +304,10 @@ app.post("/activity", async (req, res) => {
       0,
       0,
     ];
-     data = await axios.get("http://127.0.0.1:5000/harvesting", {
+    data = await axios.get("http://127.0.0.1:5000/harvesting", {
       data: tuple,
     });
-res.status(200).json({harvester:data.data[0],time:data.data[1]})
-
+    res.status(200).json({ harvester: data.data[0], time: data.data[1] });
   } else if (req.body.activity == "planting") {
     tuple = [
       req.user.tractor,
@@ -328,16 +327,45 @@ res.status(200).json({harvester:data.data[0],time:data.data[1]})
       1,
       0,
     ];
-     data = await axios.get("http://127.0.0.1:5000/planting", {
+    data = await axios.get("http://127.0.0.1:5000/planting", {
       data: tuple,
     });
-    res.status(200).json({tractor:data.data[0],plow:data.data[1],seeder:data.data[2],time:data.data[3]})
+    res.status(200).json({
+      tractor: data.data[0],
+      plow: data.data[1],
+      seeder: data.data[2],
+      time: data.data[3],
+    });
   }
-
 });
 
 app.get("/add_craft_items", (req, res) => {
   res.render("users/addl");
+});
+
+app.get("/add_reps", async (req, res) => {
+  user_input = {
+    "Wiring and electrical components": req.user.wec,
+    "Wooden handle": req.user.wh,
+    "Hopper for fertilizer": req.user.hff,
+    "Handle or control mechanism": req.user.hcm,
+    "Tilling blades or tines": req.user.tll,
+    "Spray nozzles": req.user.sn,
+    Hose: req.user.hose,
+    "Control valves": req.user.cv,
+    "Wheels or tracks": req.user.wot,
+  };
+
+  console.log(req.user);
+
+  var datas = await axios.get("http://127.0.0.1:443/getTools", {
+    data: user_input,
+  });
+
+  console.log(datas.data[0][0]);
+  console.log(datas.data[0][1]);
+
+  res.render("users/addlrep", { data: datas.data });
 });
 
 module.exports = app;

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Additional Reports</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script
+      type="text/javascript"
+      src="//translate.google.com/translate_a/element.js?cb=loadtrans"
+    ></script>
+    <link rel="stylesheet" href="/css/register.css" />
+    <link rel="stylesheet" href="/css/final.css" />
+  </head>
+  <body id="body1">
+    <nav class="navbar">
+      <div class="nav-title">FarmEasy</div>
+
+      <div class="pages">
+        <span class="page"
+          ><a href="/" class="active" style="color: white">Home</a></span
+        >
+        <!-- <span class="page"><a href="/register/patient">Register</a></span> -->
+      </div>
+    </nav>
+
+    <div class="tables">
+      <table style="margin-left: 500px; margin-top: 30px">
+        <tr>
+          <th style="color: black; padding-right: 25px; font-size: 23px">
+            Tools that can be made
+          </th>
+          <th style="color: black; padding-left: 25px; font-size: 23px">
+            Quantity
+          </th>
+        </tr>
+
+        <% for(var i = 0 ; i < data.length ; i++) {%>
+        <tr>
+          <td
+            style="
+              color: black;
+              padding-left: 90px;
+              padding-bottom: 10px;
+              padding-top: 10px;
+            "
+          >
+            <%= data[i][0] %>
+          </td>
+          <td
+            style="
+              color: black;
+              padding-left: 65px;
+              padding-bottom: 10px;
+              padding-top: 10px;
+            "
+          >
+            <%= data[i][1] %>
+          </td>
+        </tr>
+        <% } %>
+      </table>
+    </div>
+  </body>
+</html>

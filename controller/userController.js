@@ -32,7 +32,7 @@ module.exports.register = async (req, res, next) => {
     const registeredUser = await User.register(user, password);
     req.login(registeredUser, (err) => {
       if (err) return next(err);
-      res.render("coupon/dashboard_user");
+      res.render("coupon/dashboard_user", { user: req.user });
     });
   } catch (e) {
     req.flash("error", `${e.message}`);
