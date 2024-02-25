@@ -16,6 +16,9 @@ body {
   font-family: sans-serif;
   background: linear-gradient(to right, #565656, #9b9b9b);
 }
+#body1 {
+  background: linear-gradient(to right, #ffffff, #ffffff);
+}
 
 .navbar {
   background-color: #000000e3;

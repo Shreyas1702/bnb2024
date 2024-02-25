@@ -334,7 +334,7 @@ app.post("/activity", async (req, res) => {
 });
 
 app.get("/add_craft_items", (req, res) => {
-  res.render("user/addl");
+  res.render("users/addl");
 });
 
 module.exports = app;
