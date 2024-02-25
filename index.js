@@ -280,4 +280,6 @@ app.post("/changes/:name", async (req, res) => {
   });
 });
 
+app.post("/");
+
 module.exports = app;
