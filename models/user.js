@@ -41,11 +41,35 @@ const UserSchema = new Schema({
     type: Number,
     default: 0,
   },
-  sprayer: {
+  wec: {
     type: Number,
     default: 0,
   },
-  tiller: {
+  wh: {
+    type: Number,
+    default: 0,
+  },
+  hff: {
+    type: Number,
+    default: 0,
+  },
+  hcm: {
+    type: Number,
+    default: 0,
+  },
+  sn: {
+    type: Number,
+    default: 0,
+  },
+  hose: {
+    type: Number,
+    default: 0,
+  },
+  cv: {
+    type: Number,
+    default: 0,
+  },
+  wot: {
     type: Number,
     default: 0,
   },
