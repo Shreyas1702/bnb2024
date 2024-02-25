@@ -280,6 +280,38 @@ app.post("/changes/:name", async (req, res) => {
   });
 });
 
+app.post("/addtool/:name", async (req, res) => {
+  var { name } = req.params;
+  name = name.toLowerCase();
+  console.log(name);
+  const user = await User.findById(req.user._id);
+  console.log(user);
+
+  if (name == "wooden handle") {
+    user.wh = req.body.data;
+  } else if (name == "wiring and electrical components") {
+    user.wec = req.body.data;
+  } else if (name == "hose") {
+    user.hose = req.body.data;
+  } else if (name == "hopper for fertilizer") {
+    user.hff = req.body.data;
+  } else if (name == "control mechanism") {
+    user.cm = req.body.data;
+  } else if (name == "tilling blades or tines") {
+    user.tll = req.body.data;
+  } else if (name == "control valves") {
+    user.cv = req.body.data;
+  } else if (name == "wheels or tracks") {
+    user.wot = req.body.data;
+  } else {
+    user.sn = req.body.data;
+  }
+  await user.save();
+  res.status(200).json({
+    success: true,
+  });
+});
+
 app.post("/activity", async (req, res) => {
   console.log(req.user);
   console.log(req.body);
