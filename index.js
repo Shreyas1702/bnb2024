@@ -285,48 +285,204 @@ app.post("/activity", async (req, res) => {
   console.log(req.body);
   var tuple = [];
   var data;
-  if (req.body.activity == "harvesting") {
-    tuple = [
-      0,
-      0,
-      0,
-      req.user.harvester,
-      0,
-      0,
-      req.user.wheat,
-      0,
-      0,
-      0,
-      0,
-      req.user.tarea,
-      0,
-      1,
-      0,
-      0,
-    ];
+  if (req.body.activity[0] == "harvesting") {
+    if (req.body.activity[1] == "wheat") {
+      tuple = [
+        0,
+        0,
+        0,
+        req.user.harvester,
+        0,
+        0,
+        req.user.quant,
+        0,
+        0,
+        0,
+        0,
+        req.body.area,
+        0,
+        1,
+        0,
+        0,
+      ];
+    } else if (req.body.activity[1] == "corn") {
+      tuple = [
+        0,
+        0,
+        0,
+        req.user.harvester,
+        0,
+        0,
+        0,
+        req.user.quant,
+        0,
+        0,
+        0,
+        req.body.area,
+        0,
+        1,
+        0,
+        0,
+      ];
+    } else if (req.body.activity[1] == "rice") {
+      tuple = [
+        0,
+        0,
+        0,
+        req.user.harvester,
+        0,
+        0,
+        0,
+        0,
+        req.user.quant,
+        0,
+        0,
+        req.body.area,
+        0,
+        1,
+        0,
+        0,
+      ];
+    } else if (req.body.activity[1] == "potato") {
+      tuple = [
+        0,
+        0,
+        0,
+        req.user.harvester,
+        0,
+        0,
+        0,
+        0,
+        0,
+        req.user.quant,
+        0,
+        req.body.area,
+        0,
+        1,
+        0,
+        0,
+      ];
+    } else {
+      tuple = [
+        0,
+        0,
+        0,
+        req.user.harvester,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        req.user.quant,
+        req.body.area,
+        0,
+        1,
+        0,
+        0,
+      ];
+    }
     data = await axios.get("http://127.0.0.1:5000/harvesting", {
       data: tuple,
     });
     res.status(200).json({ harvester: data.data[0], time: data.data[1] });
-  } else if (req.body.activity == "planting") {
-    tuple = [
-      req.user.tractor,
-      req.user.plow,
-      req.user.seeder,
-      0,
-      0,
-      0,
-      req.user.wheat,
-      0,
-      0,
-      0,
-      0,
-      req.user.tarea,
-      0,
-      0,
-      1,
-      0,
-    ];
+  } else if (req.body.activity[0] == "planting") {
+    if (req.body.activity[1] == "wheat") {
+      tuple = [
+        0,
+        0,
+        0,
+        req.user.harvester,
+        0,
+        0,
+        req.user.quant,
+        0,
+        0,
+        0,
+        0,
+        req.body.area,
+        0,
+        0,
+        1,
+        0,
+      ];
+    } else if (req.body.activity[1] == "corn") {
+      tuple = [
+        0,
+        0,
+        0,
+        req.user.harvester,
+        0,
+        0,
+        0,
+        req.user.quant,
+        0,
+        0,
+        0,
+        req.body.area,
+        0,
+        0,
+        1,
+        0,
+      ];
+    } else if (req.body.activity[1] == "rice") {
+      tuple = [
+        0,
+        0,
+        0,
+        req.user.harvester,
+        0,
+        0,
+        0,
+        0,
+        req.user.quant,
+        0,
+        0,
+        req.body.area,
+        0,
+        0,
+        1,
+        0,
+      ];
+    } else if (req.body.activity[1] == "potato") {
+      tuple = [
+        0,
+        0,
+        0,
+        req.user.harvester,
+        0,
+        0,
+        0,
+        0,
+        0,
+        req.user.quant,
+        0,
+        req.body.area,
+        0,
+        0,
+        1,
+        0,
+      ];
+    } else {
+      tuple = [
+        0,
+        0,
+        0,
+        req.user.harvester,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        req.user.quant,
+        req.body.area,
+        0,
+        0,
+        1,
+        0,
+      ];
+    }
     data = await axios.get("http://127.0.0.1:5000/planting", {
       data: tuple,
     });
