@@ -130,14 +130,14 @@
             <div class="middle">
               <div class="left">
                 <h3>Total Tools</h3>
-                <h1>88</h1>
+                <h1>65</h1>
               </div>
               <div class="progress">
                 <svg>
                   <circle cx="38" cy="38" r="36"></circle>
                 </svg>
                 <div class="number">
-                  <p>81%</p>
+                  <p>100%</p>
                 </div>
               </div>
             </div>
@@ -147,14 +147,14 @@
             <div class="middle">
               <div class="left">
                 <h3>Tools available</h3>
-                <h1>56</h1>
+                <h1><%= sum %></h1>
               </div>
               <div class="progress">
                 <svg>
                   <circle cx="38" cy="38" r="36"></circle>
                 </svg>
                 <div class="number">
-                  <p>61%</p>
+                  <p>51%</p>
                 </div>
               </div>
             </div>
@@ -530,13 +530,13 @@
             
           </td>
               <td><%=activity[i].time%></td>
-              <% if(activity[i].approve_activity=true) {%>
+              <% if(activity[i].approve_activity==false) {%>
                 <div class="sahil" style="display: grid; grid-column: auto;">
-              <td><button type="submit" style="padding: 5px; background-color: #55c57a; color: white; margin-left: 5px;">Approve</button></td>
-              <td><button type="submit" style="padding: 5px; background-color: #9f0503; color: white; margin-left: 5px;">Reject</button></td>
+              <td><a type="submit" href="http://localhost:3000/activity/Accept/<%=activity[i]._id %>" style="padding: 5px; background-color: #55c57a; color: white; margin-left: 5px;">Approve</a></td>
+              <td><a type="submit" href="http://localhost:3000/activity/Reject/<%=activity[i]._id %>" style="padding: 5px; background-color: #9f0503; color: white; margin-left: 5px;">Reject</a></td>
             </div>
               <% } else {  %>
-              <td><button type="submit" style="padding: 5px; background-color: #55c57a; color: white; margin-left: 5px;">Completed</button></td>
+              <td><a type="submit" href="http://localhost:3000/activity/Completed/<%=activity[i]._id %>" style="padding: 5px; background-color: #55c57a; color: white; margin-left: 5px;">Completed</a></td>
               <% } %>
 
             </tr>
