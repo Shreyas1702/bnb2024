@@ -284,6 +284,7 @@ app.post("/activity", async (req, res) => {
   console.log(req.user);
   console.log(req.body);
   var tuple = [];
+  var data;
   if (req.body.activity == "harvesting") {
     tuple = [
       0,
@@ -303,10 +304,12 @@ app.post("/activity", async (req, res) => {
       0,
       0,
     ];
-    const data = await axios.get("http://127.0.0.1:5000/harvesting", {
+     data = await axios.get("http://127.0.0.1:5000/harvesting", {
       data: tuple,
     });
-  } else if (req.body.activity == "Planting") {
+res.status(200).json({harvester:data.data[0],time:data.data[1]})
+
+  } else if (req.body.activity == "planting") {
     tuple = [
       req.user.tractor,
       req.user.plow,
@@ -325,12 +328,12 @@ app.post("/activity", async (req, res) => {
       1,
       0,
     ];
-    const data = await axios.get("http://127.0.0.1:5000/planting", {
+     data = await axios.get("http://127.0.0.1:5000/planting", {
       data: tuple,
     });
+    res.status(200).json({tractor:data.data[0],plow:data.data[1],seeder:data.data[2],time:data.data[3]})
   }
 
-  console.log(data);
 });
 
 app.get("/add_craft_items", (req, res) => {
