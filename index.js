@@ -280,6 +280,61 @@ app.post("/changes/:name", async (req, res) => {
   });
 });
 
-app.post("/");
+app.post("/activity", async (req, res) => {
+  console.log(req.user);
+  console.log(req.body);
+  var tuple = [];
+  if (req.body.activity == "harvesting") {
+    tuple = [
+      0,
+      0,
+      0,
+      req.user.harvester,
+      0,
+      0,
+      req.user.wheat,
+      0,
+      0,
+      0,
+      0,
+      req.user.tarea,
+      0,
+      1,
+      0,
+      0,
+    ];
+    const data = await axios.get("http://127.0.0.1:5000/harvesting", {
+      data: tuple,
+    });
+  } else if (req.body.activity == "Planting") {
+    tuple = [
+      req.user.tractor,
+      req.user.plow,
+      req.user.seeder,
+      0,
+      0,
+      0,
+      req.user.wheat,
+      0,
+      0,
+      0,
+      0,
+      req.user.tarea,
+      0,
+      0,
+      1,
+      0,
+    ];
+    const data = await axios.get("http://127.0.0.1:5000/planting", {
+      data: tuple,
+    });
+  }
+
+  console.log(data);
+});
+
+app.get("/add_craft_items", (req, res) => {
+  res.render("user/addl");
+});
 
 module.exports = app;
