@@ -65,6 +65,19 @@ const handleChat = () => {
 
         chatState = "equipmentSelection"; // Update state
       }
+      if (userMessage === "3") {
+        // Display the response for selecting equipment service
+        const responseMessage =
+          "You have chosen crafting item registration. Please select the equipment: A - Wiring & Elec, B - Wooden Handle, C - Hopper(fertilizer), D - Control Mechanism, E - Tines, F - Spray Nozzles, G - Hose, H - Control Valves, I - Wheels or tracks";
+        serviceSel = "CraftReg";
+        appendMessage(userMessage, "outgoing");
+        setTimeout(() => {
+          chatbox.scrollTo(0, chatbox.scrollHeight);
+          appendMessage(responseMessage, "incoming");
+        }, 300);
+
+        chatState = "equipmentSelection"; // Update state
+      }
       break;
     case "equipmentSelection":
       // If user selects equipment A or B
@@ -113,6 +126,41 @@ const handleChat = () => {
         if (Object.keys(seedOptions).includes(userMessage)) {
           // If user selects seed, prompt for the amount
           const selectedSeed = seedOptions[userMessage];
+          const responseMessage = `You have chosen ${selectedSeed}. Please enter the amount:`;
+          appendMessage(userMessage, "outgoing");
+          setTimeout(() => {
+            chatbox.scrollTo(0, chatbox.scrollHeight);
+            appendMessage(responseMessage, "incoming");
+          }, 300);
+          chatState = "amountEntry"; // Update state
+          option = selectedSeed;
+        } else {
+          // If user enters invalid input in the seed selection state
+          setTimeout(() => {
+            chatbox.scrollTo(0, chatbox.scrollHeight);
+            appendMessage(
+              "Invalid input. Please enter a valid option.",
+              "incoming"
+            );
+          }, 300);
+        }
+      }
+      else if (serviceSel === "CraftReg") {
+        const CraftOptions = {
+          A: "Wiring & Electrical",
+          B: "Wooden Handle",
+          C: "Hopper(fertilizer)",
+          D: "Control Mechanism",
+          E: "Tilling blades or tines",
+          F: "Spray Nozzles",
+          G: "Hose",
+          H: "Control Valves",
+          I: "Wheels or tracks"
+        };
+
+        if (Object.keys(CraftOptions).includes(userMessage)) {
+          // If user selects seed, prompt for the amount
+          const selectedSeed = CraftOptions[userMessage];
           const responseMessage = `You have chosen ${selectedSeed}. Please enter the amount:`;
           appendMessage(userMessage, "outgoing");
           setTimeout(() => {
