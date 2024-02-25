@@ -32,7 +32,7 @@ module.exports.register = async (req, res, next) => {
     const registeredUser = await User.register(user, password);
     req.login(registeredUser, (err) => {
       if (err) return next(err);
-      res.render("coupon/dashboard_user", { user: req.user });
+      res.redirect("/user_dashboard");
     });
   } catch (e) {
     req.flash("error", `${e.message}`);
@@ -132,9 +132,9 @@ module.exports.login = async (req, res) => {
         patients.push(patient);
       }
       console.log(patients);
-      res.render("coupon/dashboard", { appointments, patients });
+      
     } else {
-      res.render("coupon/dashboard_user", { user: req.user });
+      res.redirect("/user_dashboard");
     }
   } catch (e) {
     console.log(e);
