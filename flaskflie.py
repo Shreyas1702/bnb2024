@@ -5,42 +5,50 @@ app = Flask(__name__)
 data = [
     {
         "Crafting Item": "Fertilizer Spreader",
-
         "Wiring and electrical components": 20,
         "Wooden handle": None,
-
-
         "Hopper for fertilizer": 1,
-
+        "Handle or control mechanism": None,
+        "Tilling blades or tines": None,
+        "Spray nozzles": None,
+        "Hose": None,
+        "Control valves": None,
+        "Wheels or tracks": 2
     },
     {
         "Crafting Item": "Hoe",
-
-        "Wiring and electrical components": 10,
+        "Wiring and electrical components": None,
         "Wooden handle": 1,
-
-        "Hopper for fertilizer": 1,
+        "Hopper for fertilizer": None,
         "Handle or control mechanism": 1,
         "Tilling blades or tines": 1,
+        "Spray nozzles": None,
+        "Hose": None,
+        "Control valves": None,
+        "Wheels or tracks": None
     },
     {
         "Crafting Item": "Sprayer",
         "Wiring and electrical components": 30,
         "Wooden handle": None,
-
         "Hopper for fertilizer": 1,
-
+        "Handle or control mechanism": None,
         "Spray nozzles": 3,
-
         "Hose": 1,
         "Control valves": 1,
+        "Wheels or tracks": 4
     },
     {
-        "Crafting Item": "Tiller",
-        "Wiring and electrical components": 40,
-        "Wooden handle": None,
-        "Wheels or tracks": 2,
+        "Crafting Item": "Plow",
+        "Wiring and electrical components": None,
+        "Wooden handle": 1,
+        "Hopper for fertilizer": None,
+        "Handle or control mechanism": 1,
         "Tilling blades or tines": 1,
+        "Spray nozzles": None,
+        "Hose": None,
+        "Control valves": None,
+        "Wheels or tracks": None,
     }
 ]
 user_input = {

@@ -5,11 +5,13 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Register</title>
+  <title>Login</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=loadtrans"></script>
+
   <link rel="stylesheet" href="/css/register.css" />
   <link rel="stylesheet" href="/css/final.css" />
 
@@ -23,7 +25,9 @@
 </head>
 
 <body>
+
   <main class="container" mt="5"><%- include('../partials/flash')%></main>
+  <div id="gele"></div>
   <nav class="navbar">
     <div class="nav-title">MedEasy</div>
 
@@ -32,7 +36,7 @@
       <span class="page"><a href="/register/patient">Register</a></span>
     </div>
   </nav>
- 
+
 
   <!-- <div class="form">
       <h2>Register</h2>
@@ -70,27 +74,21 @@
       <div class="col-md-6">
         <div class="card shadow-lg">
 
-          <form
-method="POST"
-novalidate
-onsubmit="return validate() "
-action="/login"
-class="box"
->
+          <form method="POST" novalidate onsubmit="return validate() " action="/login" class="box">
             <h2>Login</h2>
             <p class="text-muted">Enter following details carefully</p>
             <div class="row">
-              
+
               <div class="col-md-6">
-              
+
                 <input type="text" name="username" placeholder="User">
               </div>
               <div class="col-md-6">
-              
+
                 <input type="password" name="password" placeholder="Password">
-            
+
               </div>
-              
+
             </div>
 
 
@@ -140,6 +138,11 @@ class="box"
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
+  <script>
+    function loadtrans() {
+      new google.translate.TranslateElement("gele");
+    }
+  </script>
 </body>
 <script src="/javascript/register.js"></script>
 
@@ -151,4 +154,3 @@ onsubmit="return validate() "
 action="/login"
 >
 <button type="submit" id="btn-submit">Login</button> -->
-                    

@@ -1,6 +1,7 @@
 * {
   color: white;
 }
+
 /* 
 body {
   background-image: url("https://cdn.pixabay.com/photo/2016/03/27/16/23/woman-1283009_960_720.jpg");
@@ -16,6 +17,7 @@ body {
   font-family: sans-serif;
   background: linear-gradient(to right, #565656, #9b9b9b);
 }
+
 #body1 {
   background: linear-gradient(to right, #ffffff, #ffffff);
 }
@@ -26,6 +28,7 @@ body {
   display: flex;
   justify-content: space-between;
 }
+
 .nav-title {
   font-weight: 900;
   font-size: 2rem;
@@ -35,12 +38,14 @@ body {
   background-clip: text;
   text-fill-color: transparent;
 }
+
 .pages {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 40px;
 }
+
 .page {
   padding: 5px 20px;
   border-radius: 20px 20px 20px 20px;
@@ -48,10 +53,12 @@ body {
   font-size: 24px;
   color: #f27483;
 }
+
 .contain {
   display: flex;
   justify-content: center;
 }
+
 a {
   color: #69f0ba;
   color: white;
@@ -61,6 +68,7 @@ a {
   text-decoration: none;
   /* color:black; */
 }
+
 .form {
   position: absolute;
   right: 5%;
@@ -71,6 +79,7 @@ a {
   border-radius: 24px;
   background-color: #7380ec;
 }
+
 #btn-submit {
   display: flex;
   justify-content: center;
@@ -85,6 +94,7 @@ a {
   font-weight: bold;
   border-radius: 20px;
 }
+
 .element {
   display: flex;
   flex-direction: column;

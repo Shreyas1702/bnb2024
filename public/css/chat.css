@@ -69,7 +69,7 @@ body.show-chatbot .chatbot-toggler span:last-child {
     position: fixed;
     right: 35px;
     bottom: 90px;
-    width: 420px;
+    width: 550px;
     background: #fff;
     border-radius: 15px;
     overflow: hidden;
@@ -80,6 +80,7 @@ body.show-chatbot .chatbot-toggler span:last-child {
     box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1),
         0 32px 64px -48px rgba(0, 0, 0, 0.5);
     transition: all 0.1s ease;
+    z-index: 1000;
 }
 
 body.show-chatbot .chatbot {
@@ -156,15 +157,17 @@ header h2 {
 .chatbox .chat p {
     white-space: pre-wrap;
     padding: 12px 16px;
-    border-radius: 10px 10px 0 10px;
-    max-width: 75%;
+    border-radius: 10px 10px 10px 0;
+    max-width: 100%;
     color: #fff;
+    
     font-size: 0.95rem;
     background: #ffd700;
 }
 
 .chatbox .incoming p {
-    border-radius: 10px 10px 10px 0;
+    border-radius: 20px 20px 20px 0;
+    width: 255px;
 }
 
 .chatbox .chat p.error {
@@ -218,6 +221,7 @@ header h2 {
 
 .chat-input textarea:invalid~.mic-icon {
     visibility: visible;
+    
 }
 
 @media (max-width: 490px) {
