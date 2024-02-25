@@ -491,6 +491,59 @@
 
             <button type="submit" style="padding: 10px; background-color: #55c57a; color: white; margin-left: 35px;">Submit</button>
           </form>
+          <% if(activity.length!=0) {%>
+          <table>
+            <tr>
+              <th>Activity</th>
+              <th>Tool</th>
+                <th>Time</th>
+                
+  
+            </tr>
+            <% for (var i=0;i<activity.length; i++) {%>
+             
+            <tr>
+              <td style="padding: 7.5px;"><%= activity[i].activity_name %></td>
+              <td style="padding: 5px;">
+              <ul>
+                <% if(activity[i].harvester > 0) {%>
+                  <li>Harvester: <%= activity[i].harvester%></li>
+                  <%}%>
+                <% if(activity[i].tractor > 0){ %>
+                <li>Tractor: <%= activity[i].tractor%></li>
+                <%}%>
+
+                <% if(activity[i].plow > 0){ %>
+                <li>Plow: <%= activity[i].plow%></li>
+                <%}%>
+
+                <% if(activity[i].seeder > 0){ %>
+                <li>Seeder: <%= activity[i].seeder%></li>
+                <%}%>
+
+                <% if(activity[i].hoe > 0){ %>
+                <li>Hoe: <%= activity[i].hoe%></li>
+                <%}%>
+
+              </ul>
+              
+            
+          </td>
+              <td><%=activity[i].time%></td>
+              <% if(activity[i].approve_activity=true) {%>
+                <div class="sahil" style="display: grid; grid-column: auto;">
+              <td><button type="submit" style="padding: 5px; background-color: #55c57a; color: white; margin-left: 5px;">Approve</button></td>
+              <td><button type="submit" style="padding: 5px; background-color: #9f0503; color: white; margin-left: 5px;">Reject</button></td>
+            </div>
+              <% } else {  %>
+              <td><button type="submit" style="padding: 5px; background-color: #55c57a; color: white; margin-left: 5px;">Completed</button></td>
+              <% } %>
+
+            </tr>
+           
+            <% } %>
+          </table>
+          <% } %>
           <!-- <div class="item customers">
             <div class="icon">
               <span class="material-icons-sharp"> person </span>

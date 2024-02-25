@@ -27,6 +27,7 @@ const axios = require("axios");
 const upload = multer();
 const Hospital = require("./models/Hosp");
 const Appointment = require("./models/Appointment");
+const Activity = require("./models/Activity");
 app.use(
   cors({
     origin: "*",
@@ -283,6 +284,7 @@ app.post("/changes/:name", async (req, res) => {
 app.post("/activity", async (req, res) => {
   console.log(req.user);
   console.log(req.body);
+  console.log(req.body.quant)
   var tuple = [];
   var data;
   if (req.body.activity[0] == "harvesting") {
@@ -294,7 +296,7 @@ app.post("/activity", async (req, res) => {
         req.user.harvester,
         0,
         0,
-        req.user.quant,
+        req.body.quant,
         0,
         0,
         0,
@@ -314,7 +316,7 @@ app.post("/activity", async (req, res) => {
         0,
         0,
         0,
-        req.user.quant,
+        req.body.quant,
         0,
         0,
         0,
@@ -334,7 +336,7 @@ app.post("/activity", async (req, res) => {
         0,
         0,
         0,
-        req.user.quant,
+        req.body.quant,
         0,
         0,
         req.body.area,
@@ -354,7 +356,7 @@ app.post("/activity", async (req, res) => {
         0,
         0,
         0,
-        req.user.quant,
+        req.body.quant,
         0,
         req.body.area,
         0,
@@ -374,7 +376,7 @@ app.post("/activity", async (req, res) => {
         0,
         0,
         0,
-        req.user.quant,
+        req.body.quant,
         req.body.area,
         0,
         1,
@@ -385,17 +387,27 @@ app.post("/activity", async (req, res) => {
     data = await axios.get("http://127.0.0.1:5000/harvesting", {
       data: tuple,
     });
-    res.status(200).json({ harvester: data.data[0], time: data.data[1] });
+    const acti=new Activity({
+      id:req.user._id,
+      tarea:req.body.area,
+      activity_name:'harvesting',
+      time:data.data[1],
+      harvester:data.data[0],
+      
+    })
+    var new_acti=await acti().save
+
+    res.redirect('/user_dashboard')
   } else if (req.body.activity[0] == "planting") {
     if (req.body.activity[1] == "wheat") {
       tuple = [
+        req.user.tractor,
+        req.user.plow,
+        req.user.seeder,
         0,
         0,
         0,
-        req.user.harvester,
-        0,
-        0,
-        req.user.quant,
+        req.body.quant,
         0,
         0,
         0,
@@ -408,14 +420,14 @@ app.post("/activity", async (req, res) => {
       ];
     } else if (req.body.activity[1] == "corn") {
       tuple = [
+        req.user.tractor,
+        req.user.plow,
+        req.user.seeder,
         0,
         0,
         0,
-        req.user.harvester,
         0,
-        0,
-        0,
-        req.user.quant,
+        req.body.quant,
         0,
         0,
         0,
@@ -427,15 +439,15 @@ app.post("/activity", async (req, res) => {
       ];
     } else if (req.body.activity[1] == "rice") {
       tuple = [
+        req.user.tractor,
+        req.user.plow,
+        req.user.seeder,
         0,
         0,
         0,
-        req.user.harvester,
         0,
         0,
-        0,
-        0,
-        req.user.quant,
+        req.body.quant,
         0,
         0,
         req.body.area,
@@ -446,16 +458,16 @@ app.post("/activity", async (req, res) => {
       ];
     } else if (req.body.activity[1] == "potato") {
       tuple = [
+        req.user.tractor,
+        req.user.plow,
+        req.user.seeder,
         0,
         0,
         0,
-        req.user.harvester,
         0,
         0,
         0,
-        0,
-        0,
-        req.user.quant,
+        req.body.quant,
         0,
         req.body.area,
         0,
@@ -465,17 +477,17 @@ app.post("/activity", async (req, res) => {
       ];
     } else {
       tuple = [
+        req.user.tractor,
+        req.user.plow,
+        req.user.seeder,
         0,
         0,
         0,
-        req.user.harvester,
         0,
         0,
         0,
         0,
-        0,
-        0,
-        req.user.quant,
+        req.body.quant,
         req.body.area,
         0,
         0,
@@ -486,12 +498,17 @@ app.post("/activity", async (req, res) => {
     data = await axios.get("http://127.0.0.1:5000/planting", {
       data: tuple,
     });
-    res.status(200).json({
-      tractor: data.data[0],
-      plow: data.data[1],
-      seeder: data.data[2],
-      time: data.data[3],
-    });
+const acti=new Activity({
+  id:req.user._id,
+  tarea:req.body.area,
+  activity_name:'planting',
+  time:data.data[3],
+  tractor:data.data[0],
+  plow:data.data[1],
+  seeder:data.data[2],
+})
+var newacti=await acti.save()
+res.redirect('/user_dashboard')
   }
 });
 
@@ -523,5 +540,18 @@ app.get("/add_reps", async (req, res) => {
 
   res.render("users/addlrep", { data: datas.data });
 });
+
+app.get('/user_dashboard',async(req,res)=>{
+  var activity=await Activity.find({id:req.user._id})
+console.log(activity)
+if(activity.length>0){
+  
+res.render('coupon/dashboard_user',{user:req.user,activity})}
+else{
+  activity=[]
+  res.render('coupon/dashboard_user',{user:req.user,activity})}
+}
+
+)
 
 module.exports = app;
