@@ -576,11 +576,20 @@ app.get("/add_reps", async (req, res) => {
 app.get("/user_dashboard", async (req, res) => {
   var activity = await Activity.find({ id: req.user._id });
   console.log(activity);
+  var user = await User.findById(req.user._id);
+  var sum =
+    user.tractor +
+    user.plow +
+    user.seeder +
+    user.harvester +
+    user.hoe +
+    user.f_spreader;
+
   if (activity.length > 0) {
-    res.render("coupon/dashboard_user", { user: req.user, activity });
+    res.render("coupon/dashboard_user", { user: req.user, activity, sum });
   } else {
     activity = [];
-    res.render("coupon/dashboard_user", { user: req.user, activity });
+    res.render("coupon/dashboard_user", { user: req.user, activity, sum });
   }
 });
 
@@ -615,6 +624,39 @@ app.post("/getrequire", async (req, res) => {
   // console.log(datas);
 
   res.render("users/addlrep", { data: datas.data, mess: msg.data });
+});
+
+app.get("/activity/:type/:aid", async (req, res) => {
+  const { aid, type } = req.params;
+  var acti = await Activity.findById(aid);
+  var farmer = await User.findById(req.user._id);
+  if (type == "Accept") {
+    farmer.tractor = farmer.tractor - acti.tractor;
+    farmer.plow = farmer.plow - acti.plow;
+    farmer.seeder = farmer.seeder - acti.seeder;
+    farmer.harvester = farmer.harvester - acti.harvester;
+    farmer.f_spreader = farmer.f_spreader - acti.f_spreader;
+    acti.approve_activity = true;
+    await acti.save();
+    await farmer.save();
+    console.log(farmer);
+    res.redirect("/user_dashboard");
+  } else if (type == "Reject") {
+    await Activity.deleteOne({ _id: aid });
+    res.redirect("/user_dashboard");
+  } else {
+    farmer.tractor = farmer.tractor + acti.tractor;
+    farmer.plow = farmer.plow + acti.plow;
+    farmer.seeder = farmer.seeder + acti.seeder;
+    farmer.harvester = farmer.harvester + acti.harvester;
+    farmer.f_spreader = farmer.f_spreader + acti.f_spreader;
+
+    await farmer.save();
+
+    await Activity.deleteOne({ _id: aid });
+
+    res.redirect("/user_dashboard");
+  }
 });
 
 module.exports = app;
