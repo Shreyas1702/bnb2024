@@ -108,6 +108,8 @@ def check():
 @app.route('/newreq/<requested_tool>', methods=['GET'])
 def check_components(requested_tool):
     # Check if the requested tool is in the data
+    user_input = request.get_json();
+
     found = False
     for item in data:
         if item["Crafting Item"] == requested_tool:

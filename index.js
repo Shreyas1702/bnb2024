@@ -316,7 +316,7 @@ app.post("/addtool/:name", async (req, res) => {
 app.post("/activity", async (req, res) => {
   console.log(req.user);
   console.log(req.body);
-  console.log(req.body.quant)
+  console.log(req.body.quant);
   var tuple = [];
   var data;
   if (req.body.activity[0] == "harvesting") {
@@ -419,17 +419,16 @@ app.post("/activity", async (req, res) => {
     data = await axios.get("http://127.0.0.1:5000/harvesting", {
       data: tuple,
     });
-    const acti=new Activity({
-      id:req.user._id,
-      tarea:req.body.area,
-      activity_name:'harvesting',
-      time:data.data[1],
-      harvester:data.data[0],
-      
-    })
-    var new_acti=await acti().save
+    const acti = new Activity({
+      id: req.user._id,
+      tarea: req.body.area,
+      activity_name: "harvesting",
+      time: data.data[1],
+      harvester: data.data[0],
+    });
+    var new_acti = await acti().save;
 
-    res.redirect('/user_dashboard')
+    res.redirect("/user_dashboard");
   } else if (req.body.activity[0] == "planting") {
     if (req.body.activity[1] == "wheat") {
       tuple = [
@@ -530,17 +529,17 @@ app.post("/activity", async (req, res) => {
     data = await axios.get("http://127.0.0.1:5000/planting", {
       data: tuple,
     });
-const acti=new Activity({
-  id:req.user._id,
-  tarea:req.body.area,
-  activity_name:'planting',
-  time:data.data[3],
-  tractor:data.data[0],
-  plow:data.data[1],
-  seeder:data.data[2],
-})
-var newacti=await acti.save()
-res.redirect('/user_dashboard')
+    const acti = new Activity({
+      id: req.user._id,
+      tarea: req.body.area,
+      activity_name: "planting",
+      time: data.data[3],
+      tractor: data.data[0],
+      plow: data.data[1],
+      seeder: data.data[2],
+    });
+    var newacti = await acti.save();
+    res.redirect("/user_dashboard");
   }
 });
 
@@ -567,23 +566,55 @@ app.get("/add_reps", async (req, res) => {
     data: user_input,
   });
 
-  console.log(datas.data[0][0]);
-  console.log(datas.data[0][1]);
+  // console.log(datas.data[0][0]);
+  // console.log(datas.data[0][1]);
+  console.log(datas);
 
-  res.render("users/addlrep", { data: datas.data });
+  res.render("users/addlrep", { data: datas.data, mess: "undefined" });
 });
 
-app.get('/user_dashboard',async(req,res)=>{
-  var activity=await Activity.find({id:req.user._id})
-console.log(activity)
-if(activity.length>0){
-  
-res.render('coupon/dashboard_user',{user:req.user,activity})}
-else{
-  activity=[]
-  res.render('coupon/dashboard_user',{user:req.user,activity})}
-}
+app.get("/user_dashboard", async (req, res) => {
+  var activity = await Activity.find({ id: req.user._id });
+  console.log(activity);
+  if (activity.length > 0) {
+    res.render("coupon/dashboard_user", { user: req.user, activity });
+  } else {
+    activity = [];
+    res.render("coupon/dashboard_user", { user: req.user, activity });
+  }
+});
 
-)
+app.post("/getrequire", async (req, res) => {
+  user_input = {
+    "Wiring and electrical components": req.user.wec,
+    "Wooden handle": req.user.wh,
+    "Hopper for fertilizer": req.user.hff,
+    "Handle or control mechanism": req.user.hcm,
+    "Tilling blades or tines": req.user.tll,
+    "Spray nozzles": req.user.sn,
+    Hose: req.user.hose,
+    "Control valves": req.user.cv,
+    "Wheels or tracks": req.user.wot,
+  };
+
+  console.log(req.user);
+  console.log(req.body);
+
+  var msg = await axios.get(`http://127.0.0.1:443/newreq/${req.body.tool}`, {
+    data: user_input,
+  });
+
+  var datas = await axios.get("http://127.0.0.1:443/getTools", {
+    data: user_input,
+  });
+
+  console.log(msg);
+
+  // // console.log(datas.data[0][0]);
+  // // console.log(datas.data[0][1]);
+  // console.log(datas);
+
+  res.render("users/addlrep", { data: datas.data, mess: msg.data });
+});
 
 module.exports = app;

@@ -34,8 +34,8 @@
       </div>
     </nav>
 
-    <div class="tables">
-      <table style="margin-left: 500px; margin-top: 30px">
+    <div class="tables" style="display: flex; flex-direction: row">
+      <table style="margin-left: 300px; margin-top: 30px">
         <tr>
           <th style="color: black; padding-right: 25px; font-size: 23px">
             Tools that can be made
@@ -71,8 +71,31 @@
         <% } %>
       </table>
 
-      <form action="/getrequire" method="post">
-        <input type="text" name="tool" id="tool" placeholder="Add your tool" />
+      <form
+        action="/getrequire"
+        method="post"
+        style="margin-left: 200px; margin-top: 30px"
+      >
+        <label for="tool">Select your tool</label>
+        <input
+          style="color: black"
+          type="text"
+          name="tool"
+          id="tool"
+          placeholder="Add your tool"
+        />
+        <button type="submit">Submit</button>
+
+        <% console.log(mess.needed_items); %> <% if (mess.needed_items) { %>
+        <h3 style="color: black"><%= mess.message %></h3>
+        <ul>
+          <% Object.keys(mess.needed_items).forEach(function(item) { %>
+          <li style="color: black">
+            <%= item %>: <%= mess.needed_items[item] %>
+          </li>
+          <% }); %>
+        </ul>
+        <% } %>
       </form>
     </div>
   </body>
